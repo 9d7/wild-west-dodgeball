@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerShooting : MonoBehaviour
 {
-    [SerializeField] private List<ProjectileType> projectileTypes;
+    [SerializeField] private ProjectileTypes projectileTypes;
 
     // the player's currently-held bullets
     private Queue<string> projectiles;
@@ -28,7 +28,7 @@ public class PlayerShooting : MonoBehaviour
             // this is O(n), but there's like 6 bullet types so
             // i think it's fine--Dictionaries are a pain to
             // serialize
-            foreach (ProjectileType projectileType in projectileTypes)
+            foreach (ProjectileType projectileType in projectileTypes.types)
             {
                 if (projectileType.name == projectile)
                 {

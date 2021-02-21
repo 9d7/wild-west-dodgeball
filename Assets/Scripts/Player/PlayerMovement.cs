@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,10 @@ public class PlayerMovement : MonoBehaviour
 {
 
     [Header("Movement Options")] [SerializeField] private float speed;
+    [SerializeField] private float acceleration;
     // Start is called before the first frame update
+    private Vector2 movementInput;
+    
 
     private Rigidbody2D rigid;
     void Start()
@@ -17,9 +21,14 @@ public class PlayerMovement : MonoBehaviour
 
     void OnMove(InputValue input)
     {
-        // TODO (Thomas) make this good
-        Vector2 vec = input.Get<Vector2>();
-        rigid.velocity = vec * speed;
+        movementInput = input.Get<Vector2>();
     }
 
+    // Runs on every physics timestep
+    private void FixedUpdate()
+    {
+        Vector2 targetVel = movementInput * speed;
+
+        rigid.velocity = Vector3.MoveTowards(rigid.velocity, targetVel, acceleration);
+    }
 }

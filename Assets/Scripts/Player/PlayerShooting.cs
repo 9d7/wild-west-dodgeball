@@ -32,7 +32,8 @@ public class PlayerShooting : MonoBehaviour
             {
                 if (projectileType.name == projectile)
                 {
-                    // TODO move this forward a bit
+                    // TODO (eric) move projectilePos forward a bit
+                    // so it's not inside the player
                     Vector3 projectilePos = gameObject.transform.position;
                     GameObject newProj = Instantiate(
                         projectileType.template, projectilePos, Quaternion.identity

@@ -66,7 +66,7 @@ public class PlayerShooting : MonoBehaviour
     void Start()
     {
         projectiles = new Queue<string>();
-        projectiles.Enqueue("test");
+        projectiles.Enqueue("gun");
     }
 
 }

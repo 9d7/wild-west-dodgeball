@@ -209,6 +209,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78bc3881444cdc5438689bf875c42e05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileTypes:
-  - name: test
-    template: {fileID: 4499758663097390854, guid: 5455b822464c6974984e9dfc22ccb8ec, type: 3}
+  projectileTypes: {fileID: 11400000, guid: 492df79b605bfe54a87a5ac6cd95f6c4, type: 2}

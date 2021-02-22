@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [Header("Bullet Physics")]
+    [Header("Physics")]
     public Vector2 direction;
     public float speed;
+
 
     private Rigidbody2D rigid;
     // Start is called before the first frame update
@@ -24,9 +25,8 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision other)
-    {
-        //rigid.velocity = other.relativeVelocity;
-    }
+
+
+    
 
 }

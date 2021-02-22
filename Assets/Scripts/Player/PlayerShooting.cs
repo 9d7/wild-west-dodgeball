@@ -12,7 +12,7 @@ public class PlayerShooting : MonoBehaviour
     
     private Vector2 aimDirection = Vector2.one;
     // Start is called before the first frame update
-    void OnTryShoot(InputValue input)
+    void OnShoot(InputValue input)
     {
         if (projectiles.Count == 0)
         {
@@ -23,7 +23,7 @@ public class PlayerShooting : MonoBehaviour
         {
             string projectile = projectiles.Dequeue();
             // for sound
-            SendMessage("ShootSuccess", projectile);
+            SendMessage("ShootSuccess", projectile, SendMessageOptions.DontRequireReceiver);
 
             // this is O(n), but there's like 6 bullet types so
             // i think it's fine--Dictionaries are a pain to

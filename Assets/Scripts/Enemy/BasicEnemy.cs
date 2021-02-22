@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BasicEnemy : MonoBehaviour
 {
+
+    [SerializeField] private float gunChance;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +16,8 @@ public class BasicEnemy : MonoBehaviour
 
     IEnumerator BasicAttack (EnemyShooting shooter, Vector2 pos, Vector2 playerPos)
     {
-        shooter.Shoot(pos, (playerPos - pos).normalized, "gun");
+        string projectile = Random.value < gunChance ? "gun" : "ball";
+        shooter.Shoot(pos, (playerPos - pos).normalized, projectile);
         yield return null;
     }
 }

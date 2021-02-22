@@ -151,6 +151,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trail: {fileID: 2800956657979093480}
+  ignoreLayers:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!1 &8560038335368554337
 GameObject:
   m_ObjectHideFlags: 0

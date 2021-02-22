@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Experimental.AI;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
@@ -17,12 +18,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float DashRecoveryTime;
     [SerializeField] private float PickupRange;
     [SerializeField] private LayerMask PickupLayer;
+    [SerializeField] private SpriteRenderer showBall;
 
     
     // Start is called before the first frame update
     private Vector2 movementInput;
 
     private bool invincible = false;
+
+    private bool hasBall = false;
 
     private Animator anim;
 
@@ -35,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
+        showBall.enabled = false;
     }
 
     void OnDash()
@@ -48,13 +53,21 @@ public class PlayerMovement : MonoBehaviour
 
     void OnGrab(InputValue input)
     {
+        if (dashing)
+            return;
         Debug.Log("Grabbing");
         Collider2D dodgeball = Physics2D.OverlapCircle(transform.position, PickupRange, (int)PickupLayer);
+        Debug.Log(dodgeball);
         if (dodgeball)
         {
-            Debug.Log("ADSOSADLKASDMLKDASMLDAKSM");
             Destroy(dodgeball.gameObject);
         }
+    }
+
+    void PickupBall()
+    {
+        hasBall = true;
+        showBall.enabled = true;
     }
 
     void OnMove(InputValue input)

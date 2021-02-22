@@ -41,7 +41,7 @@ public class EnemyShooting : MonoBehaviour
             Quaternion.identity
         );
         newProj.GetComponent<Projectile>().direction = direction;
-        newProj.layer = LayerMask.NameToLayer("ProjectileFromEnemy");
+            //newProj.layer = LayerMask.NameToLayer("ProjectileFromEnemy");
     }
 
 }

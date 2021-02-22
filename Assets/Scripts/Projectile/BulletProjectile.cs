@@ -5,8 +5,14 @@ using UnityEngine;
 
 public class BulletProjectile : MonoBehaviour
 {
-    private void OnCollisionEnter2D(Collision2D other)
+    [SerializeField] private float Damage = 25;
+    private void OnCollisionEnter2D(Collision2D coll)
     {
+        PlayerHealth ph = coll.collider.GetComponentInParent<PlayerHealth>();
+        if (ph)
+        {
+            ph.TakeDamage(Damage);
+        }
         Destroy(gameObject);
     }
 }

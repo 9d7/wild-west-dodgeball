@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7088525077900802694}
   - component: {fileID: 6762030996130428164}
   - component: {fileID: 5506919089659776477}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BulletProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,3 +149,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25dca881d66379947925444c2bb9d974, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Damage: 25

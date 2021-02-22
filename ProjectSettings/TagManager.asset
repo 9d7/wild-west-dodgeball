@@ -17,9 +17,9 @@ TagManager:
   - ProjectileFromEnemy
   - Player
   - Enemy
-  - 
-  - 
-  - 
+  - EnvironmentCollider
+  - DamageCollider
+  - Dodgeball
   - 
   - 
   - 

@@ -14,7 +14,7 @@ public class BasicEnemy : MonoBehaviour
 
     IEnumerator BasicAttack (EnemyShooting shooter, Vector2 pos, Vector2 playerPos)
     {
-        if (Random.value < 1f)
+        if (Random.value < 0.2f)
         {
             shooter.Shoot(pos, (playerPos - pos).normalized, "dodgeball");
         }

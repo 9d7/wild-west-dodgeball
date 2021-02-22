@@ -1,11 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemyMovement : MonoBehaviour
 {
     public int health;
     public float moveSpeed;
+    public float moveAccel = 1;
     public float stopDistance;
     public float retreatDistance;
 
@@ -17,26 +20,29 @@ public class EnemyMovement : MonoBehaviour
 
     public Transform[] moveSpots;
     private int randomSpot;
+    private Rigidbody2D rbody;
 
     // Start is called before the first frame update
     void Start()
     {
+        rbody = GetComponent<Rigidbody2D>();
+        GameManager.Instance.RegisterEnemy(this);
         waitTime = startWaitTime;
         player = GameObject.FindWithTag("Player").transform;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if (targetPlayer)
-        {
-            targetPlayerFunc();
-        } else
-        {
-            //wander
+      
             wanderFunc();
-        }
+        
 
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.OnEnemyDied(this);
     }
 
     void targetPlayerFunc()
@@ -59,7 +65,7 @@ public class EnemyMovement : MonoBehaviour
 
     void wanderFunc()
     {
-        transform.position = Vector2.MoveTowards(transform.position, moveSpots[randomSpot].position, moveSpeed * Time.deltaTime);
+        rbody.velocity = Vector3.MoveTowards(rbody.velocity, (moveSpots[randomSpot].position - transform.position).normalized * moveSpeed, moveAccel);
         if(Vector2.Distance(transform.position, moveSpots[randomSpot].position) < 0.2f){
             if(waitTime <= 0)
             {

@@ -3,16 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dodgeball : MonoBehaviour
+public class PlayerDodgebal : MonoBehaviour
 {
     public ParticleSystem trail;
     public LayerMask ignoreLayers;
     private bool active = true;
+    private Rigidbody2D rbody;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        rbody = GetComponent<Rigidbody2D>();
+        Destroy(gameObject, 2);
     }
 
     // Update is called once per frame
@@ -23,14 +25,14 @@ public class Dodgeball : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (active && (((1 << other.gameObject.layer) & (int)ignoreLayers) == 0))
+        if (rbody.velocity.magnitude > 1.0f)
         {
-            PlayerHealth ph = other.collider.GetComponentInParent<PlayerHealth>();
+            BasicEnemy ph = other.collider.GetComponentInParent<BasicEnemy>();
             if (ph)
             {
-                ph.TakeDamage(Mathf.Infinity);
+                Destroy(ph.gameObject);
+                Destroy(gameObject);
             }
-            active = false;
             trail.Stop();
             GetComponent<Rigidbody2D>().drag = 2;
         }

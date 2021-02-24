@@ -22,6 +22,16 @@ public class EnemyMovement : MonoBehaviour
     private int randomSpot;
     private Rigidbody2D rbody;
 
+    private float time = 0;
+
+    enum enemy_state
+    {
+        IDLE,
+        ALERT,
+        ATTACK
+    }
+    enemy_state state = enemy_state.IDLE;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,12 +41,16 @@ public class EnemyMovement : MonoBehaviour
         player = GameObject.FindWithTag("Player").transform;
     }
 
+
     // Update is called once per frame
     void FixedUpdate()
     {
-      
-            wanderFunc();
-        
+        if (state == enemy_state.IDLE)
+        {
+            //wanderFunc();
+            int N = 3;
+            lissajous_curve(5, 2, 5, 4, Mathf.PI / 4);
+        }
 
     }
 
@@ -81,5 +95,15 @@ public class EnemyMovement : MonoBehaviour
                 waitTime -= Time.deltaTime;
             }
         }
+    }
+
+    void lissajous_curve(float A, float B, float a, float b, float e)
+    {
+        time += Time.deltaTime;
+        Random.InitState((int)(Time.realtimeSinceStartup));
+        float x = A * Mathf.Sin(a * Mathf.PI * time * 0.1f + e);
+        float y = B * Mathf.Sin(b * Mathf.PI * time * 0.1f);
+        Vector2 move_path = new Vector2(x, y);
+        rbody.velocity = move_path;
     }
 }

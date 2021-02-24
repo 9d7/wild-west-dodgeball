@@ -7,7 +7,8 @@ public class Dodgeball : MonoBehaviour
 {
     public ParticleSystem trail;
     public LayerMask ignoreLayers;
-    private bool active = true;
+    private bool active = false;
+    private float timeActivate = 2;
     
     // Start is called before the first frame update
     void Start()
@@ -18,7 +19,11 @@ public class Dodgeball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        timeActivate -= Time.deltaTime;
+        if (timeActivate <= 0)
+        {
+            active = true;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)

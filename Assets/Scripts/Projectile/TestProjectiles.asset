@@ -19,3 +19,5 @@ MonoBehaviour:
     template: {fileID: 7657258027716908953, guid: 911841fe151a3d844a976aaa3c6f08d4, type: 3}
   - name: dodgeball
     template: {fileID: 7256770600231713373, guid: ba3eb7a23de64344a844e09685a63612, type: 3}
+  - name: dodgeball2
+    template: {fileID: 6728786363412524262, guid: 247671a036c77764fb8fbdc979f5b105, type: 3}

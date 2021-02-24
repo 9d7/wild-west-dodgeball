@@ -3,16 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletProjectile : MonoBehaviour
+public class BulletProjectile : Projectile
 {
-    [SerializeField] private float Damage = 25;
-    private void OnCollisionEnter2D(Collision2D coll)
+    [SerializeField] private float damage = 25;
+    private void Start()
     {
-        PlayerHealth ph = coll.collider.GetComponentInParent<PlayerHealth>();
-        if (ph)
-        {
-            ph.TakeDamage(Damage);
-        }
+        InitObject();
+    }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        HitPlayer(other, damage);
         Destroy(gameObject);
     }
 }

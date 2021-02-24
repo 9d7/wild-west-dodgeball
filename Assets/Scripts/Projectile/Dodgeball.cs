@@ -3,44 +3,64 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dodgeball : MonoBehaviour
+public class Dodgeball : Projectile
 {
     public ParticleSystem trail;
     public LayerMask ignoreLayers;
-    private bool active = false;
-    private float timeActivate = 2;
+    private float timeActivate = 0.5f;
+
+    enum dodgeballState
+    {
+        INIT,
+        INTHEAIR,
+        BOUNCE
+    }
+    private dodgeballState state = dodgeballState.INIT;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        InitObject();
+        existTime = 5f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        timeActivate -= Time.deltaTime;
-        if (timeActivate <= 0)
+        
+        
+        if (state == dodgeballState.BOUNCE)
         {
-            active = true;
+            existTime -= Time.deltaTime;
+            if(existTime <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
+
+        if (state == dodgeballState.INIT)
+        {
+            timeActivate -= Time.deltaTime;
+            if (timeActivate <= 0)
+            {
+                state = dodgeballState.INTHEAIR;
+            }
         }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (active && (((1 << other.gameObject.layer) & (int)ignoreLayers) == 0))
+        if (state == dodgeballState.INTHEAIR)
         {
+            state = dodgeballState.BOUNCE;
             PlayerHealth ph = other.collider.GetComponentInParent<PlayerHealth>();
             if (ph)
             {
                 ph.TakeDamage(Mathf.Infinity);
             }
-            active = false;
             trail.Stop();
             GetComponent<Rigidbody2D>().drag = 2;
-        }
-        
+        }  
     }
-    
-    
+
 }

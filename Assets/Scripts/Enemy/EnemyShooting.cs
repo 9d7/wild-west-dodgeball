@@ -65,13 +65,17 @@ public class EnemyShooting : MonoBehaviour
 
     void BasicAttack(EnemyShooting shooter, Vector2 pos, Vector2 playerPos)
     {
-        if (Random.value < 0.5f)
+        if (Random.value < 0.3f)
         {
-            shooter.Shoot(pos, (playerPos - pos).normalized, "dodgeball2");
+            shooter.Shoot(pos, (playerPos - pos).normalized, "bottle");
+        }
+        else if (Random.value < 0.6f)
+        {
+            shooter.Shoot(pos, (playerPos - pos).normalized, "gun");
         }
         else
         {
-            shooter.Shoot(pos, (playerPos - pos).normalized, "gun");
+            shooter.Shoot(pos, (playerPos - pos).normalized, "dodgeball2");
         }
     }
 

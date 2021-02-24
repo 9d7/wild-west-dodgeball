@@ -24,6 +24,11 @@ public class EnemyMovement : MonoBehaviour
 
     private float time = 0;
 
+    public ProjectileTypes projectileTypes;
+
+    public float attackInterval = 5;
+    private float attackTime;
+
     enum enemy_state
     {
         IDLE,
@@ -38,9 +43,19 @@ public class EnemyMovement : MonoBehaviour
         rbody = GetComponent<Rigidbody2D>();
         GameManager.Instance.RegisterEnemy(this);
         waitTime = startWaitTime;
+        attackTime = attackInterval;
         player = GameObject.FindWithTag("Player").transform;
     }
+    private void Update()
+    {
+        if (attackTime <= 0)
+        {
+            attackTime = attackInterval;
+            StartCoroutine(AttackReady());
 
+        }
+        attackTime -= Time.deltaTime;
+    }
 
     // Update is called once per frame
     void FixedUpdate()
@@ -50,9 +65,14 @@ public class EnemyMovement : MonoBehaviour
             //wanderFunc();
             int N = 3;
             lissajous_curve(5, 2, 5, 4, Mathf.PI / 4);
+        } else if (state == enemy_state.ATTACK)
+        {
+            rbody.velocity = new Vector3(0, 0, 0);
         }
 
     }
+
+
 
     private void OnDestroy()
     {
@@ -105,5 +125,41 @@ public class EnemyMovement : MonoBehaviour
         float y = B * Mathf.Sin(b * Mathf.PI * time * 0.1f);
         Vector2 move_path = new Vector2(x, y);
         rbody.velocity = move_path;
+    }
+
+    IEnumerator AttackReady()
+    {
+        state = enemy_state.ATTACK;
+        yield return new WaitForSeconds(0.2f);
+        BasicAttack(gameObject.transform.position, player.position);
+        yield return new WaitForSeconds(0.6f);
+        state = enemy_state.IDLE;
+    }
+
+    void Shoot(Vector2 position, Vector2 direction, string type)
+    {
+        GameObject newProj = Instantiate(
+            projectileTypes[type]?.template,
+            position,
+            Quaternion.identity
+        );
+        newProj.GetComponent<Projectile>().direction = direction;
+        //newProj.layer = LayerMask.NameToLayer("ProjectileFromEnemy");
+    }
+
+    void BasicAttack(Vector2 pos, Vector2 playerPos)
+    {
+        if (Random.value < 0.3f)
+        {
+            Shoot(pos, (playerPos - pos).normalized, "bottle");
+        }
+        else if (Random.value < 0.6f)
+        {
+            Shoot(pos, (playerPos - pos).normalized, "gun");
+        }
+        else
+        {
+            Shoot(pos, (playerPos - pos).normalized, "dodgeball2");
+        }
     }
 }

@@ -94,8 +94,6 @@ GameObject:
   - component: {fileID: 9128023960251086397}
   - component: {fileID: 9128023960251086398}
   - component: {fileID: 9128023960251086399}
-  - component: {fileID: 9128023960251086393}
-  - component: {fileID: 9128023960251086394}
   m_Layer: 11
   m_Name: Enemy_1
   m_TagString: Untagged
@@ -178,29 +176,5 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
---- !u!114 &9128023960251086393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9128023960251086528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bf226ee5326fec43bee29ab865511f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   projectileTypes: {fileID: 11400000, guid: 492df79b605bfe54a87a5ac6cd95f6c4, type: 2}
-  timeBetweenAttacks: 5
---- !u!114 &9128023960251086394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9128023960251086528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b97f49f16ce9e04c9be71215a591e69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  attackInterval: 5

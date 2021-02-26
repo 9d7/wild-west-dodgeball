@@ -29,6 +29,9 @@ public class EnemyMovement : MonoBehaviour
     public float attackInterval = 5;
     private float attackTime;
 
+    public int randomSeed;
+    private Vector3 nextMovingSpot;
+
     enum enemy_state
     {
         IDLE,
@@ -45,10 +48,12 @@ public class EnemyMovement : MonoBehaviour
         waitTime = startWaitTime;
         attackTime = attackInterval;
         player = GameObject.FindWithTag("Player").transform;
+        Random.InitState(randomSeed);
+        nextMovingSpot = moveSpots[Random.Range(0, moveSpots.Length)].position;
     }
     private void Update()
     {
-        if (attackTime <= 0)
+        if (attackTime <= Random.value)
         {
             attackTime = attackInterval;
             StartCoroutine(AttackReady());
@@ -62,9 +67,8 @@ public class EnemyMovement : MonoBehaviour
     {
         if (state == enemy_state.IDLE)
         {
-            //wanderFunc();
-            int N = 3;
-            lissajous_curve(5, 2, 5, 4, Mathf.PI / 4);
+            wanderFunc();
+            //lissajous_curve(5, 2, 5, 4, Mathf.PI / 4);
         } else if (state == enemy_state.ATTACK)
         {
             rbody.velocity = new Vector3(0, 0, 0);
@@ -99,30 +103,35 @@ public class EnemyMovement : MonoBehaviour
 
     void wanderFunc()
     {
-        rbody.velocity = Vector3.MoveTowards(rbody.velocity, (moveSpots[randomSpot].position - transform.position).normalized * moveSpeed, moveAccel);
-        if(Vector2.Distance(transform.position, moveSpots[randomSpot].position) < 0.2f){
-            if(waitTime <= 0)
+        
+        rbody.velocity = Vector3.MoveTowards(rbody.velocity, (nextMovingSpot - transform.position).normalized * moveSpeed, moveAccel);
+        if(Vector2.Distance(transform.position, nextMovingSpot) < 0.1f){
+            rbody.velocity = new Vector3(0, 0, 0);
+            if (waitTime <= 0)
             {
-                int randomSpot_tmp = Random.Range(0, moveSpots.Length);
-                while(randomSpot_tmp == randomSpot)
+                int randomSpot_tmp = Random.Range(0, 100) % moveSpots.Length;
+                /*
+                while (randomSpot_tmp == randomSpot)
                 {
                     randomSpot_tmp = Random.Range(0, moveSpots.Length);
                 }
+                */
                 randomSpot = randomSpot_tmp;
+                nextMovingSpot = moveSpots[randomSpot].position + new Vector3(Random.Range(-1,1), Random.Range(-1, 1), Random.Range(-1, 1));
                 waitTime = startWaitTime;
             } else
             {
                 waitTime -= Time.deltaTime;
             }
         }
+
     }
 
     void lissajous_curve(float A, float B, float a, float b, float e)
     {
         time += Time.deltaTime;
-        Random.InitState((int)(Time.realtimeSinceStartup));
-        float x = A * Mathf.Sin(a * Mathf.PI * time * 0.1f + e);
-        float y = B * Mathf.Sin(b * Mathf.PI * time * 0.1f);
+        float x = A * Mathf.Sin(a * Mathf.PI * time * 0.1f + e + Random.value);
+        float y = B * Mathf.Sin(b * Mathf.PI * time * 0.1f + Random.value);
         Vector2 move_path = new Vector2(x, y);
         rbody.velocity = move_path;
     }
@@ -149,11 +158,11 @@ public class EnemyMovement : MonoBehaviour
 
     void BasicAttack(Vector2 pos, Vector2 playerPos)
     {
-        if (Random.value < 0.3f)
+        if (Random.value < 0.8f)
         {
             Shoot(pos, (playerPos - pos).normalized, "bottle");
         }
-        else if (Random.value < 0.6f)
+        else if (Random.value < 0.9f)
         {
             Shoot(pos, (playerPos - pos).normalized, "gun");
         }

@@ -7,7 +7,7 @@ public class Dodgeball : Projectile
 {
     public ParticleSystem trail;
     public LayerMask ignoreLayers;
-    private float timeActivate = 0.5f;
+    private float timeActivate = 0.1f;
 
     enum dodgeballState
     {

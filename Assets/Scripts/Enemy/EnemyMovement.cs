@@ -11,6 +11,7 @@ public class EnemyMovement : MonoBehaviour
     public float moveAccel = 1;
     public float stopDistance;
     public float retreatDistance;
+    public float attackRange = 15;
 
     public bool targetPlayer;
     private Transform player;
@@ -35,6 +36,7 @@ public class EnemyMovement : MonoBehaviour
     enum enemy_state
     {
         IDLE,
+        PATROL,
         ALERT,
         ATTACK
     }
@@ -53,19 +55,34 @@ public class EnemyMovement : MonoBehaviour
     }
     private void Update()
     {
-        if (attackTime <= Random.value)
+        if (state == enemy_state.IDLE)
         {
-            attackTime = attackInterval;
-            StartCoroutine(AttackReady());
-
+            if (Vector2.Distance(transform.position, player.position) < attackRange)
+            {
+                state = enemy_state.PATROL;
+            }
         }
-        attackTime -= Time.deltaTime;
+        else if (state == enemy_state.PATROL)
+        {
+            if (attackTime <= Random.value)
+            {
+                attackTime = attackInterval;
+                StartCoroutine(AttackReady());
+
+            }
+            attackTime -= Time.deltaTime;
+            if (Vector2.Distance(transform.position, player.position) > attackRange)
+            {
+                attackTime = attackInterval;
+                state = enemy_state.IDLE;
+            }
+        }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (state == enemy_state.IDLE)
+        if (state == enemy_state.PATROL)
         {
             wanderFunc();
             //lissajous_curve(5, 2, 5, 4, Mathf.PI / 4);
@@ -142,7 +159,7 @@ public class EnemyMovement : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         BasicAttack(gameObject.transform.position, player.position);
         yield return new WaitForSeconds(0.6f);
-        state = enemy_state.IDLE;
+        state = enemy_state.PATROL;
     }
 
     void Shoot(Vector2 position, Vector2 direction, string type)
@@ -176,6 +193,7 @@ public class EnemyMovement : MonoBehaviour
         if(other.collider.gameObject.layer == LayerMask.NameToLayer("ProjectileFromAlly"))
         {
             Debug.Log("HIT ENEMY");
+            Destroy(gameObject);
         }
     }
 }

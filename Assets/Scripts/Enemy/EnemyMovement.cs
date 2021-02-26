@@ -48,7 +48,8 @@ public class EnemyMovement : MonoBehaviour
     }
     private void Update()
     {
-        if (attackTime <= 0)
+        Random.InitState((int)(Random.value * 100));
+        if (attackTime <= Random.value)
         {
             attackTime = attackInterval;
             StartCoroutine(AttackReady());
@@ -63,7 +64,6 @@ public class EnemyMovement : MonoBehaviour
         if (state == enemy_state.IDLE)
         {
             //wanderFunc();
-            int N = 3;
             lissajous_curve(5, 2, 5, 4, Mathf.PI / 4);
         } else if (state == enemy_state.ATTACK)
         {
@@ -120,9 +120,8 @@ public class EnemyMovement : MonoBehaviour
     void lissajous_curve(float A, float B, float a, float b, float e)
     {
         time += Time.deltaTime;
-        Random.InitState((int)(Time.realtimeSinceStartup));
-        float x = A * Mathf.Sin(a * Mathf.PI * time * 0.1f + e);
-        float y = B * Mathf.Sin(b * Mathf.PI * time * 0.1f);
+        float x = A * Mathf.Sin(a * Mathf.PI * time * 0.1f + e + Random.value);
+        float y = B * Mathf.Sin(b * Mathf.PI * time * 0.1f + Random.value);
         Vector2 move_path = new Vector2(x, y);
         rbody.velocity = move_path;
     }
@@ -149,11 +148,11 @@ public class EnemyMovement : MonoBehaviour
 
     void BasicAttack(Vector2 pos, Vector2 playerPos)
     {
-        if (Random.value < 0.3f)
+        if (Random.value < 0.8f)
         {
             Shoot(pos, (playerPos - pos).normalized, "bottle");
         }
-        else if (Random.value < 0.6f)
+        else if (Random.value < 0.9f)
         {
             Shoot(pos, (playerPos - pos).normalized, "gun");
         }

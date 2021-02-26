@@ -58,12 +58,14 @@ public class PlayerMovement : MonoBehaviour
 
     void OnGrab(InputValue input)
     {
+        Debug.Log("grabing");
         if (dashing)
             return;
         Collider2D dodgeball = Physics2D.OverlapCircle(transform.position, PickupRange, (int)PickupLayer);
         if (dodgeball)
         {
             Destroy(dodgeball.gameObject);
+            Debug.Log("picking");
             PickupBall();
         }
     }

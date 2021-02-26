@@ -171,4 +171,11 @@ public class EnemyMovement : MonoBehaviour
             Shoot(pos, (playerPos - pos).normalized, "dodgeball2");
         }
     }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.collider.gameObject.layer == LayerMask.NameToLayer("ProjectileFromAlly"))
+        {
+            Debug.Log("HIT ENEMY");
+        }
+    }
 }

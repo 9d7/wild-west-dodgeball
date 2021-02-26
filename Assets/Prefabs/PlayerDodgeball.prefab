@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5204309625324378779}
   - component: {fileID: 5204309625324378778}
   - component: {fileID: 8673199201858250386}
-  m_Layer: 14
+  m_Layer: 8
   m_Name: PlayerDodgeball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 3484223389596499045}
   - component: {fileID: 743843066238980396}
   - component: {fileID: 561440847540024462}
-  m_Layer: 14
+  m_Layer: 8
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}

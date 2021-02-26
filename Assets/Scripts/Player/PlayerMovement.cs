@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform showBallParent;
     [SerializeField] private Camera playerCam;
     [SerializeField] private GameObject dodgeball;
+    private GameObject ballInHand;
     private Vector2 aimingDir;
 
     
@@ -45,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
         showBall.enabled = false;
-        PickupRange = 5f;
+        PickupRange = 1.75f;
     }
 
     void OnDash()
@@ -59,15 +60,18 @@ public class PlayerMovement : MonoBehaviour
 
     void OnGrab(InputValue input)
     {
-        Debug.Log("grabing");
         if (dashing)
             return;
         Collider2D dodgeball = Physics2D.OverlapCircle(transform.position, PickupRange, (int)PickupLayer);
         if (dodgeball)
         {
-            Destroy(dodgeball.gameObject);
-            Debug.Log("picking");
-            PickupBall();
+            if (dodgeball.tag == "Catchable")
+            {
+                Destroy(dodgeball.gameObject);
+                ballInHand = dodgeball.gameObject;
+                Sprite ball = dodgeball.GetComponent <SpriteRenderer>().sprite;
+                PickupBall(ball);
+            }
         }
     }
 
@@ -89,9 +93,10 @@ public class PlayerMovement : MonoBehaviour
         aimingDir = (targetPos - transform.position).normalized;
     }
 
-    void PickupBall()
+    void PickupBall(Sprite ball)
     {
         hasBall = true;
+        showBall.sprite = ball;
         showBall.enabled = true;
     }
 

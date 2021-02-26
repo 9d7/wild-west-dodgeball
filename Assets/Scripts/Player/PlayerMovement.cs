@@ -45,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
         showBall.enabled = false;
+        PickupRange = 5f;
     }
 
     void OnDash()

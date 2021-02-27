@@ -19,20 +19,11 @@ public class CameraFollowPlayer : MonoBehaviour
     {
         Follow();
     }
-    void Update()
-    {
-        /*
-        if (Vector3.Distance(transform.position, playerTransform.position) > MaxDistance)
-        {
-            Vector2 targetPosition = Vector3.MoveTowards(playerTransform.position, transform.position, MaxDistance); 
-            transform.position = Vector3.Lerp(transform.position, targetPosition, FollowSpeed * Time.deltaTime);
-        }
-        */
-    }
+
     void Follow()
     {
         Vector3 targetPosition = playerTransform.position + offset;
         Vector3 smoothPosition = Vector3.Lerp(transform.position, targetPosition, smoothFactor * Time.fixedDeltaTime);
-        transform.position = targetPosition;
+        transform.position = smoothPosition;
     }
 }

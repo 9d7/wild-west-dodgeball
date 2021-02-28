@@ -22,11 +22,22 @@ public class BottleProjectile : Projectile
     {
         timer += Time.deltaTime;
         gameObject.transform.Rotate(0f, 0f, Time.deltaTime * turnSpeed * 180f / Mathf.PI);
+        if (state == projState.INIT)
+        {
+            timeActivate -= Time.deltaTime;
+            if (timeActivate <= 0)
+            {
+                state = projState.INTHEAIR;
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        HitPlayer(other, 10f);
-        Destroy(gameObject);
+        if (state == projState.INTHEAIR)
+        {
+            HitPlayer(other, 10f);
+            Destroy(gameObject);
+        }
     }
 }

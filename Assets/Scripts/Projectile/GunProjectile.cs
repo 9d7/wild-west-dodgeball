@@ -27,21 +27,35 @@ public class GunProjectile : Projectile
         timer += Time.deltaTime;
         gameObject.transform.Rotate(0f, 0f, Time.deltaTime * turnSpeed * 180f/Mathf.PI);
 
-        if (timer > secondsPerShot)
+        if (gameObject.layer == LayerMask.NameToLayer("ProjectileFromEnemy"))
         {
-            timer -= secondsPerShot;
-            Vector3 bulletPos = gameObject.transform.position;
-            GameObject newBullet = Instantiate(bullet, bulletPos, Quaternion.identity);
+            if (timer > secondsPerShot)
+            {
+                timer -= secondsPerShot;
+                Vector3 bulletPos = gameObject.transform.position;
+                GameObject newBullet = Instantiate(bullet, bulletPos, Quaternion.identity);
 
-            newBullet.layer = gameObject.layer;
-            Projectile proj = newBullet.GetComponent<Projectile>();
-            proj.direction = gameObject.transform.rotation * Vector3.right;
+                newBullet.layer = gameObject.layer;
+                Projectile proj = newBullet.GetComponent<Projectile>();
+                proj.direction = gameObject.transform.rotation * Vector3.right;
 
+            }
+        }
+        if (state == projState.INIT)
+        {
+            timeActivate -= Time.deltaTime;
+            if (timeActivate <= 0)
+            {
+                state = projState.INTHEAIR;
+            }
         }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Destroy(gameObject);
+        if (state == projState.INTHEAIR)
+        {
+            Destroy(gameObject);
+        }
     }
 }

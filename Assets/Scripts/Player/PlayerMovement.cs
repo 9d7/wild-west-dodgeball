@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform showBallParent;
     [SerializeField] private Camera playerCam;
     [SerializeField] private GameObject dodgeball;
+    public ProjectileTypes projectileTypes;
+
     private GameObject ballInHand;
     private Vector2 aimingDir;
 
@@ -38,7 +40,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool dashing = false;
     private bool canDash = true;
-    
+
+    private string catchedBall = "";
 
     private Rigidbody2D rigid;
     void Start()
@@ -65,8 +68,10 @@ public class PlayerMovement : MonoBehaviour
         Collider2D dodgeball = Physics2D.OverlapCircle(transform.position, PickupRange, (int)PickupLayer);
         if (dodgeball)
         {
-            if (dodgeball.tag == "Catchable")
+            if (dodgeball.tag == "gun" || dodgeball.tag == "bottle")
             {
+                catchedBall = dodgeball.tag;
+                Debug.Log(catchedBall);
                 Destroy(dodgeball.gameObject);
                 ballInHand = dodgeball.gameObject;
                 Sprite ball = dodgeball.GetComponent <SpriteRenderer>().sprite;
@@ -104,9 +109,20 @@ public class PlayerMovement : MonoBehaviour
     {
         hasBall = false;
         showBall.enabled = false;
-        GameObject newDodgeball = GameObject.Instantiate(dodgeball);
-        newDodgeball.transform.position = transform.position + (Vector3)(aimingDir * 0.2f);
-        newDodgeball.GetComponent<Rigidbody2D>().velocity = aimingDir * 50;
+        //GameObject newDodgeball = GameObject.Instantiate(dodgeball);
+        Vector2 pos = (Vector2)transform.position + (aimingDir * 1.5f);
+
+        GameObject newProj = Instantiate(projectileTypes[catchedBall]?.template, pos, Quaternion.identity);
+        newProj.GetComponent<Projectile>().direction = aimingDir;
+        newProj.layer = LayerMask.NameToLayer("ProjectileFromAlly");
+        newProj.GetComponent<SpriteRenderer>().color = Color.yellow;
+
+        /*
+        newProj.transform.position = transform.position + (Vector3)(aimingDir * 1.5f);
+        Debug.Log(aimingDir);
+        newProj.GetComponent<Rigidbody2D>().velocity = aimingDir * 50;
+        Debug.Log(newProj.GetComponent<Rigidbody2D>().velocity);
+        */
     }
 
     void OnMove(InputValue input)

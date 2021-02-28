@@ -16,7 +16,14 @@ public class Projectile : MonoBehaviour
 
     private Rigidbody2D rigid;
 
-
+    protected enum projState
+    {
+        INIT,
+        INTHEAIR,
+        BOUNCE
+    }
+    protected projState state = projState.INIT;
+    protected float timeActivate = 0.1f;
 
     // Start is called before the first frame update
     void Start()
@@ -38,10 +45,13 @@ public class Projectile : MonoBehaviour
 
     protected void HitPlayer(Collision2D other, float damage)
     {
-        PlayerHealth ph = other.collider.GetComponentInParent<PlayerHealth>();
-        if (ph)
+        if(gameObject.layer == LayerMask.NameToLayer("ProjectileFromEnemy"))
         {
-            ph.TakeDamage(damage);
+            PlayerHealth ph = other.collider.GetComponentInParent<PlayerHealth>();
+            if (ph)
+            {
+                ph.TakeDamage(damage);
+            }
         }
     }
 

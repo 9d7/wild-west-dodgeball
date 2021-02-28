@@ -7,15 +7,9 @@ public class Dodgeball : Projectile
 {
     public ParticleSystem trail;
     public LayerMask ignoreLayers;
-    private float timeActivate = 0.1f;
+    
 
-    enum dodgeballState
-    {
-        INIT,
-        INTHEAIR,
-        BOUNCE
-    }
-    private dodgeballState state = dodgeballState.INIT;
+
     
     // Start is called before the first frame update
     void Start()
@@ -29,7 +23,7 @@ public class Dodgeball : Projectile
     {
         
         
-        if (state == dodgeballState.BOUNCE)
+        if (state == projState.BOUNCE)
         {
             existTime -= Time.deltaTime;
             if(existTime <= 0)
@@ -38,21 +32,21 @@ public class Dodgeball : Projectile
             }
         }
 
-        if (state == dodgeballState.INIT)
+        if (state == projState.INIT)
         {
             timeActivate -= Time.deltaTime;
             if (timeActivate <= 0)
             {
-                state = dodgeballState.INTHEAIR;
+                state = projState.INTHEAIR;
             }
         }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (state == dodgeballState.INTHEAIR)
+        if (state == projState.INTHEAIR)
         {
-            state = dodgeballState.BOUNCE;
+            state = projState.BOUNCE;
             PlayerHealth ph = other.collider.GetComponentInParent<PlayerHealth>();
             if (ph)
             {

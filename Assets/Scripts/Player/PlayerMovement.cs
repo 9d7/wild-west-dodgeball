@@ -23,6 +23,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform showBallParent;
     [SerializeField] private Camera playerCam;
     [SerializeField] private GameObject dodgeball;
+
+    [Header("Animation")]
+    [SerializeField] private Animator spriteAnim;
+    [SerializeField] private SpriteRenderer spriteRenderer;
     public ProjectileTypes projectileTypes;
 
     private GameObject ballInHand;
@@ -127,7 +131,20 @@ public class PlayerMovement : MonoBehaviour
 
     void OnMove(InputValue input)
     {
+        Vector2 lastMovement = movementInput;
         movementInput = input.Get<Vector2>();
+        if(movementInput.x != 0)
+        {
+            spriteRenderer.flipX = movementInput.x < 0;
+        }
+
+        if(movementInput.magnitude > 0.1)
+        {
+            spriteAnim.SetFloat("WalkY", (movementInput.y + 1) / 2);
+        }
+
+        spriteAnim.SetBool("Walking", movementInput.magnitude > 0.1);
+
     }
 
     // Runs on every physics timestep
@@ -136,7 +153,7 @@ public class PlayerMovement : MonoBehaviour
         if (dashing)
             return;
         Vector2 targetVel = movementInput * Speed;
-
+        Debug.Log("Running");
         rigid.velocity = Vector3.MoveTowards(rigid.velocity, targetVel, Acceleration);
     }
 
@@ -144,11 +161,11 @@ public class PlayerMovement : MonoBehaviour
     {
         canDash = false;
         dashing = true;
-        anim.SetBool("Dashing", true);
+        spriteAnim.SetBool("Dashing", true);
         rigid.velocity = movementInput * (Speed * 2f);
         yield return new WaitForSeconds(DashTime);
         dashing = false;
-        anim.SetBool("Dashing", false);
+        spriteAnim.SetBool("Dashing", false);
         yield return new WaitForSeconds(DashRecoveryTime);
         canDash = true;
     }

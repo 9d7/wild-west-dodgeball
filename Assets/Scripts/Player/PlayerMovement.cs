@@ -48,6 +48,7 @@ public class PlayerMovement : MonoBehaviour
     private string catchedBall = "";
 
     private Rigidbody2D rigid;
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -70,17 +71,17 @@ public class PlayerMovement : MonoBehaviour
         if (dashing)
             return;
         Collider2D dodgeball = Physics2D.OverlapCircle(transform.position, PickupRange, (int)PickupLayer);
+        Debug.Log(dodgeball);
+        spriteAnim.SetTrigger("Grab");
+
         if (dodgeball)
         {
-            if (dodgeball.tag == "gun" || dodgeball.tag == "bottle")
-            {
                 catchedBall = dodgeball.tag;
                 Debug.Log(catchedBall);
                 Destroy(dodgeball.gameObject);
                 ballInHand = dodgeball.gameObject;
                 Sprite ball = dodgeball.GetComponent <SpriteRenderer>().sprite;
                 PickupBall(ball);
-            }
         }
     }
 
@@ -153,7 +154,7 @@ public class PlayerMovement : MonoBehaviour
         if (dashing)
             return;
         Vector2 targetVel = movementInput * Speed;
-        Debug.Log("Running");
+
         rigid.velocity = Vector3.MoveTowards(rigid.velocity, targetVel, Acceleration);
     }
 

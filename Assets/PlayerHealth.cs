@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private float MaxHealth = 100;
-    [SerializeField] private Image HealthBar;
+    [SerializeField] private HealthUIController HealthBar;
     [SerializeField] private Collider2D damageCollider;
     private float m_health = 0;
 
@@ -15,6 +15,7 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         m_health = MaxHealth;
+        UpdateUI();
     }
 
     public void BeInvincibleForTime(float t)
@@ -41,7 +42,6 @@ public class PlayerHealth : MonoBehaviour
         {
             //Die
             GameManager.Instance.OnPlayerDied();
-            Debug.Log("You died!");
             return true;
         }
 
@@ -50,6 +50,6 @@ public class PlayerHealth : MonoBehaviour
 
     private void UpdateUI()
     {
-        HealthBar.fillAmount = m_health / MaxHealth;
+        HealthBar.RenderHealth(m_health);
     }
 }

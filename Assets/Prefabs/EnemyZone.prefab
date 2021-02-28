@@ -417,6 +417,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9128023960251086399, guid: 0f1f5daae4bc56a409a98816284da33b, type: 3}
+      propertyPath: enemyZone
+      value: 
+      objectReference: {fileID: 7463238716350988762}
+    - target: {fileID: 9128023960251086399, guid: 0f1f5daae4bc56a409a98816284da33b, type: 3}
       propertyPath: moveSpeed
       value: 2
       objectReference: {fileID: 0}

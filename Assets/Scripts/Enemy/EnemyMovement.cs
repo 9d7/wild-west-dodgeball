@@ -33,6 +33,9 @@ public class EnemyMovement : MonoBehaviour
     public int randomSeed;
     private Vector3 nextMovingSpot;
 
+    public EnemySpawn enemySpawn;
+    public GameObject enemyZone;
+
     enum enemy_state
     {
         IDLE,
@@ -45,6 +48,7 @@ public class EnemyMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        enemySpawn = GameObject.FindObjectOfType<EnemySpawn>();
         rbody = GetComponent<Rigidbody2D>();
         GameManager.Instance.RegisterEnemy(this);
         waitTime = startWaitTime;
@@ -193,7 +197,8 @@ public class EnemyMovement : MonoBehaviour
         if(other.collider.gameObject.layer == LayerMask.NameToLayer("ProjectileFromAlly"))
         {
             Debug.Log("HIT ENEMY");
-            Destroy(gameObject);
+            Destroy(enemyZone);
+            enemySpawn.enemyDied();
         }
     }
 }

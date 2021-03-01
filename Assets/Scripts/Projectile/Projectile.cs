@@ -12,6 +12,8 @@ public class Projectile : MonoBehaviour
     public bool turning;
 
     protected float existTime = 10f;
+    public AudioClip collideSound;
+    [SerializeField] private GameObject tempSound;
 
 
     private Rigidbody2D rigid;
@@ -55,8 +57,18 @@ public class Projectile : MonoBehaviour
         }
     }
 
+    protected void OnCollisionEnter2D(Collision2D _)
+    {
+             GameObject newSound = Instantiate(tempSound, transform.position, Quaternion.identity);
+             TemporaryAudio temp = newSound.GetComponent<TemporaryAudio>();
+             temp.audio = collideSound;
+             temp.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
+             temp.volume = 1f;
+             temp.destination = "Environment";
+    }
 
 
-    
+
+
 
 }

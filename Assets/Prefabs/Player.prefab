@@ -332,7 +332,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.007218361, y: -0.38511908}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -343,7 +343,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.7690153, y: 0.7639152}
   m_EdgeRadius: 0
 --- !u!1 &1440711049
 GameObject:
@@ -694,6 +694,9 @@ MonoBehaviour:
   showBallParent: {fileID: 45881439}
   playerCam: {fileID: 0}
   dodgeball: {fileID: 5204309625324378777, guid: 66be40e0d8dd447428f39a0087fce2ff, type: 3}
+  spriteAnim: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  projectileTypes: {fileID: 0}
 --- !u!114 &1362981188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -707,6 +710,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 100
-  HealthBar: {fileID: 891669768}
+  HealthBar: {fileID: 0}
   damageCollider: {fileID: 1588259836}
   invinicible: 0

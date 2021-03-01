@@ -59,7 +59,7 @@ public class @PlayerMovementInput : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Pause"",
+                    ""name"": ""GamePause"",
                     ""type"": ""Button"",
                     ""id"": ""069cd945-9bae-4b90-8bca-fe232216ccd4"",
                     ""expectedControlType"": ""Button"",
@@ -247,11 +247,11 @@ public class @PlayerMovementInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5f8cf0d8-02d8-4404-b836-32b5db908a4c"",
-                    ""path"": ""<Keyboard>/escape"",
+                    ""path"": ""<Keyboard>/p"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Pause"",
+                    ""action"": ""GamePause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -267,7 +267,7 @@ public class @PlayerMovementInput : IInputActionCollection, IDisposable
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Grab = m_Player.FindAction("Grab", throwIfNotFound: true);
-        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_GamePause = m_Player.FindAction("GamePause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -322,7 +322,7 @@ public class @PlayerMovementInput : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Shoot;
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_Grab;
-    private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_GamePause;
     public struct PlayerActions
     {
         private @PlayerMovementInput m_Wrapper;
@@ -332,7 +332,7 @@ public class @PlayerMovementInput : IInputActionCollection, IDisposable
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @Grab => m_Wrapper.m_Player_Grab;
-        public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        public InputAction @GamePause => m_Wrapper.m_Player_GamePause;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -357,9 +357,9 @@ public class @PlayerMovementInput : IInputActionCollection, IDisposable
                 @Grab.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGrab;
                 @Grab.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGrab;
                 @Grab.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGrab;
-                @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
-                @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
-                @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @GamePause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGamePause;
+                @GamePause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGamePause;
+                @GamePause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGamePause;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -379,9 +379,9 @@ public class @PlayerMovementInput : IInputActionCollection, IDisposable
                 @Grab.started += instance.OnGrab;
                 @Grab.performed += instance.OnGrab;
                 @Grab.canceled += instance.OnGrab;
-                @Pause.started += instance.OnPause;
-                @Pause.performed += instance.OnPause;
-                @Pause.canceled += instance.OnPause;
+                @GamePause.started += instance.OnGamePause;
+                @GamePause.performed += instance.OnGamePause;
+                @GamePause.canceled += instance.OnGamePause;
             }
         }
     }
@@ -393,6 +393,6 @@ public class @PlayerMovementInput : IInputActionCollection, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnGrab(InputAction.CallbackContext context);
-        void OnPause(InputAction.CallbackContext context);
+        void OnGamePause(InputAction.CallbackContext context);
     }
 }

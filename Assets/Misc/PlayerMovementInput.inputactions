@@ -46,7 +46,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Pause",
+                    "name": "GamePause",
                     "type": "Button",
                     "id": "069cd945-9bae-4b90-8bca-fe232216ccd4",
                     "expectedControlType": "Button",
@@ -234,11 +234,11 @@
                 {
                     "name": "",
                     "id": "5f8cf0d8-02d8-4404-b836-32b5db908a4c",
-                    "path": "<Keyboard>/escape",
+                    "path": "<Keyboard>/p",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Pause",
+                    "action": "GamePause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

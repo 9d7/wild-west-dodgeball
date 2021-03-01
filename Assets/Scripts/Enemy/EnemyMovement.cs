@@ -174,6 +174,7 @@ public class EnemyMovement : MonoBehaviour
             Quaternion.identity
         );
         newProj.GetComponent<Projectile>().direction = direction;
+        SendMessage("EnemyShoot");
         //newProj.layer = LayerMask.NameToLayer("ProjectileFromEnemy");
     }
 
@@ -197,6 +198,7 @@ public class EnemyMovement : MonoBehaviour
         if(other.collider.gameObject.layer == LayerMask.NameToLayer("ProjectileFromAlly"))
         {
             Debug.Log("HIT ENEMY");
+            SendMessage("EnemyDie");
             Destroy(enemyZone);
             enemySpawn.enemyDied();
         }

@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public int health;
+    public int health = 1;
     public float moveSpeed;
     public float moveAccel = 1;
     public float stopDistance;
@@ -185,23 +185,34 @@ public class EnemyMovement : MonoBehaviour
 
     void BasicAttack(Vector2 pos, Vector2 playerPos)
     {
-        if (Random.value < 0.8f)
+        if (this.tag == "boss")
         {
-            Shoot(pos, (playerPos - pos).normalized, "bottle");
+            Shoot(pos, (playerPos - pos).normalized + new Vector2(0.5f, 0.5f), "gun");
+            Shoot(pos, (playerPos - pos).normalized - new Vector2(0.5f, 0.5f), "gun");
         }
         else
         {
-            Shoot(pos, (playerPos - pos).normalized, "gun");
+            if (Random.value < 0.8f)
+            {
+                Shoot(pos, (playerPos - pos).normalized, "bottle");
+            }
+            else
+            {
+                Shoot(pos, (playerPos - pos).normalized, "gun");
+            }
         }
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
         if(other.collider.gameObject.layer == LayerMask.NameToLayer("ProjectileFromAlly"))
         {
-            Debug.Log("HIT ENEMY");
-            SendMessage("EnemyDie");
-            Destroy(enemyZone);
-            enemySpawn.enemyDied();
+            health -= 1;
+            if(health <= 0)
+            {
+                SendMessage("EnemyDie");
+                Destroy(enemyZone);
+                enemySpawn.enemyDied();
+            }
         }
     }
 }

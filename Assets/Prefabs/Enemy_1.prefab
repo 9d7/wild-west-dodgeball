@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9128023960251086399}
   - component: {fileID: 2049137047}
   - component: {fileID: 2049137049}
+  - component: {fileID: 2359772261546591283}
   m_Layer: 11
   m_Name: Enemy_1
   m_TagString: Untagged
@@ -72,6 +73,7 @@ MonoBehaviour:
   moveAccel: 1
   stopDistance: 6
   retreatDistance: 3
+  attackRange: 15
   targetPlayer: 0
   startWaitTime: 1
   moveSpots:
@@ -150,3 +152,31 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2359772261546591283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9128023960251086528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28ac3f666c94eff47832ad6988040867, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tempAudio: {fileID: 2038119517885338936, guid: d9898f80a7ee29a419d25358888a10c6, type: 3}
+  movementPerFootstep: 0.5
+  timePerIdle: 0
+  idleSounds:
+  - {fileID: 8300000, guid: c8199c447d7a5f841bb32594f228581b, type: 3}
+  - {fileID: 8300000, guid: c6d7857f2a77bef47b7d0737e497c81a, type: 3}
+  - {fileID: 8300000, guid: 4e0e3f311d01a2d45b131dbe66d9aee4, type: 3}
+  footstepSounds:
+  - {fileID: 8300000, guid: 8b858f193250cef40a6224cde0e1fc36, type: 3}
+  - {fileID: 8300000, guid: b9ef5fccdacc25741bdeb78234d3e42d, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: 5d2a1fed9bf403141a75746f6b330933, type: 3}
+  throwSounds:
+  - {fileID: 8300000, guid: e92bf708950e5d346b8bd6b85b93e5ec, type: 3}
+  - {fileID: 8300000, guid: 5397a67e9341c804f9c8b98eb2716edd, type: 3}
+  - {fileID: 8300000, guid: f7bcdf93eb876e2428009e717c3370c3, type: 3}

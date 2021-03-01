@@ -2468,7 +2468,7 @@ MonoBehaviour:
   PickupRange: 5
   PickupLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 16384
   showBall: {fileID: 4315287537529083702}
   showBallParent: {fileID: 4315287537621551349}
   playerCam: {fileID: 519420031}

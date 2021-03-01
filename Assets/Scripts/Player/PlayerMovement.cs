@@ -123,9 +123,7 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator Grab()
     {
         //rigid.velocity = Vector3.zero;
-        dashing = true;
         yield return new WaitForSeconds(1);
-        dashing = false;
     }
 
     void ThrowBall()

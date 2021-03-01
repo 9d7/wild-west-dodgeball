@@ -38,6 +38,7 @@ public class PlayerHealth : MonoBehaviour
             return false;
         m_health = Mathf.Clamp(m_health - amt, 0, MaxHealth);
         UpdateUI();
+        Debug.Log(m_health);
         if (m_health == 0)
         {
             //Die

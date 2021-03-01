@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     private List<EnemyMovement> em;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject gameOverMenu;
+
+    [SerializeField] private int numberOfEnemiesToKill;
     private void Awake()
     {
         if(Instance)

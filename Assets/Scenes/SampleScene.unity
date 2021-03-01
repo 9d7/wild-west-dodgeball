@@ -3994,6 +3994,7 @@ MonoBehaviour:
   MaxHealth: 100
   HealthBar: {fileID: 1551430913}
   damageCollider: {fileID: 4315287536614030166}
+  menuController: {fileID: 0}
   invinicible: 0
 --- !u!224 &4315287536954656120
 RectTransform:
@@ -4632,6 +4633,50 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3301663945385836055, guid: ee1ead4660f29e04f81a7df0a0932815, type: 3}
+      propertyPath: timePerIdle
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3301663945385836055, guid: ee1ead4660f29e04f81a7df0a0932815, type: 3}
+      propertyPath: idleSounds.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3301663945385836055, guid: ee1ead4660f29e04f81a7df0a0932815, type: 3}
+      propertyPath: deathSounds.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3301663945385836055, guid: ee1ead4660f29e04f81a7df0a0932815, type: 3}
+      propertyPath: idleSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 324f850831ae77649a836d8e242c1149, type: 3}
+    - target: {fileID: 3301663945385836055, guid: ee1ead4660f29e04f81a7df0a0932815, type: 3}
+      propertyPath: idleSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1e17ba9363f09204c82fe460f468c898, type: 3}
+    - target: {fileID: 3301663945385836055, guid: ee1ead4660f29e04f81a7df0a0932815, type: 3}
+      propertyPath: idleSounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3301663945385836055, guid: ee1ead4660f29e04f81a7df0a0932815, type: 3}
+      propertyPath: deathSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 2d76cd0600bfb2c448fc9ef23c90cd47, type: 3}
+    - target: {fileID: 3301663945385836055, guid: ee1ead4660f29e04f81a7df0a0932815, type: 3}
+      propertyPath: deathSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: cebcef1f6d900ff438b48c735c1d8d65, type: 3}
+    - target: {fileID: 3301663945385836055, guid: ee1ead4660f29e04f81a7df0a0932815, type: 3}
+      propertyPath: throwSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 20d4e93d476a7b344b54b0268930487c, type: 3}
+    - target: {fileID: 3301663945385836055, guid: ee1ead4660f29e04f81a7df0a0932815, type: 3}
+      propertyPath: throwSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 008bc2c276a7ac44b92f35209e7016c1, type: 3}
+    - target: {fileID: 3301663945385836055, guid: ee1ead4660f29e04f81a7df0a0932815, type: 3}
+      propertyPath: throwSounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 17a75d356c0578b49ab0e4322bb89277, type: 3}
     - target: {fileID: 4097269261689413122, guid: ee1ead4660f29e04f81a7df0a0932815, type: 3}
       propertyPath: m_Name
       value: EnemyBoss

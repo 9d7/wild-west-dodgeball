@@ -9,6 +9,8 @@ public class GunProjectile : Projectile
     //[SerializeField] private float turnSpeed = 2f;
     [SerializeField] private float shotsPerTurn = 5f;
     [SerializeField] private GameObject bullet;
+    [SerializeField] private AudioClip shootSound;
+    [SerializeField] private GameObject tempAudio;
 
     private float timer = 0f;
 
@@ -29,7 +31,7 @@ public class GunProjectile : Projectile
 
         if (gameObject.layer == LayerMask.NameToLayer("ProjectileFromEnemy"))
         {
-            if (timer > secondsPerShot)
+            while (timer > secondsPerShot)
             {
                 timer -= secondsPerShot;
                 Vector3 bulletPos = gameObject.transform.position;
@@ -38,6 +40,13 @@ public class GunProjectile : Projectile
                 newBullet.layer = gameObject.layer;
                 Projectile proj = newBullet.GetComponent<Projectile>();
                 proj.direction = gameObject.transform.rotation * Vector3.right;
+                
+                GameObject newSound = Instantiate(tempAudio, transform.position, Quaternion.identity);
+                TemporaryAudio temp = newSound.GetComponent<TemporaryAudio>();
+                temp.audio = shootSound;
+                temp.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
+                temp.volume = 1f;
+                temp.destination = "Environment";
 
             }
         }

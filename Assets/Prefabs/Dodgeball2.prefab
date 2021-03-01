@@ -4943,6 +4943,8 @@ MonoBehaviour:
   speed: 20
   turnSpeed: 2
   turning: 0
+  collideSound: {fileID: 8300000, guid: 3c9d42e4f8cc26e488dfd219fe748e42, type: 3}
+  tempSound: {fileID: 2038119517885338936, guid: d9898f80a7ee29a419d25358888a10c6, type: 3}
   trail: {fileID: 7789672897347283443}
   ignoreLayers:
     serializedVersion: 2

@@ -34,6 +34,7 @@ public class BottleProjectile : Projectile
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        base.OnCollisionEnter2D(other);
         if (state == projState.INTHEAIR)
         {
             HitPlayer(other, 10f);

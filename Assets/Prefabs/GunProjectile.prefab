@@ -138,5 +138,9 @@ MonoBehaviour:
   speed: 5
   turnSpeed: 1
   turning: 0
+  collideSound: {fileID: 0}
+  tempSound: {fileID: 0}
   shotsPerTurn: 30
   bullet: {fileID: 6762030996130428167, guid: 6cd0e4b8c49b5774d96a8f2c7e758885, type: 3}
+  shootSound: {fileID: 8300000, guid: 7862654150a3385408e428548415f157, type: 3}
+  tempAudio: {fileID: 2038119517885338936, guid: d9898f80a7ee29a419d25358888a10c6, type: 3}

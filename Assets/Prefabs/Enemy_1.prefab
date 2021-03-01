@@ -83,8 +83,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   projectileTypes: {fileID: 11400000, guid: 492df79b605bfe54a87a5ac6cd95f6c4, type: 2}
-  attackInterval: 5
+  attackInterval: 2
   randomSeed: 45
+  enemySpawn: {fileID: 0}
+  enemyZone: {fileID: 0}
 --- !u!70 &2049137047
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

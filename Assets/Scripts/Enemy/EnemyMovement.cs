@@ -36,6 +36,7 @@ public class EnemyMovement : MonoBehaviour
     public EnemySpawn enemySpawn;
     public GameObject enemyZone;
 
+
     enum enemy_state
     {
         IDLE,
@@ -61,6 +62,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if (state == enemy_state.IDLE)
         {
+            state = enemy_state.PATROL;
             if (Vector2.Distance(transform.position, player.position) < attackRange)
             {
                 state = enemy_state.PATROL;
@@ -77,8 +79,8 @@ public class EnemyMovement : MonoBehaviour
             attackTime -= Time.deltaTime;
             if (Vector2.Distance(transform.position, player.position) > attackRange)
             {
-                attackTime = attackInterval;
-                state = enemy_state.IDLE;
+                //attackTime = attackInterval;
+                //state = enemy_state.IDLE;
             }
         }
     }
@@ -92,7 +94,8 @@ public class EnemyMovement : MonoBehaviour
             //lissajous_curve(5, 2, 5, 4, Mathf.PI / 4);
         } else if (state == enemy_state.ATTACK)
         {
-            rbody.velocity = new Vector3(0, 0, 0);
+            wanderFunc();
+            //rbody.velocity = new Vector3(0, 0, 0);
         }
 
     }
@@ -138,7 +141,8 @@ public class EnemyMovement : MonoBehaviour
                 }
                 */
                 randomSpot = randomSpot_tmp;
-                nextMovingSpot = moveSpots[randomSpot].position + new Vector3(Random.Range(-1,1), Random.Range(-1, 1), Random.Range(-1, 1));
+                //Vector3 potNextSpot = new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), Random.Range(-1, 1));
+                nextMovingSpot = transform.position + new Vector3(Random.Range(-1,1), Random.Range(-1, 1), Random.Range(-1, 1));
                 waitTime = startWaitTime;
             } else
             {
@@ -160,14 +164,15 @@ public class EnemyMovement : MonoBehaviour
     IEnumerator AttackReady()
     {
         state = enemy_state.ATTACK;
-        yield return new WaitForSeconds(0.2f);
+        //yield return new WaitForSeconds(0.2f);
         BasicAttack(gameObject.transform.position, player.position);
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(0.1f);
         state = enemy_state.PATROL;
     }
 
     void Shoot(Vector2 position, Vector2 direction, string type)
     {
+
         GameObject newProj = Instantiate(
             projectileTypes[type]?.template,
             position,
@@ -184,13 +189,9 @@ public class EnemyMovement : MonoBehaviour
         {
             Shoot(pos, (playerPos - pos).normalized, "bottle");
         }
-        else if (Random.value < 0.9f)
-        {
-            Shoot(pos, (playerPos - pos).normalized, "gun");
-        }
         else
         {
-            Shoot(pos, (playerPos - pos).normalized, "dodgeball2");
+            Shoot(pos, (playerPos - pos).normalized, "gun");
         }
     }
     private void OnCollisionEnter2D(Collision2D other)

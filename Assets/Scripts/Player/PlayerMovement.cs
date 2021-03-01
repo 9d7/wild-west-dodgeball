@@ -73,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
         Collider2D dodgeball = Physics2D.OverlapCircle(transform.position, PickupRange, (int)PickupLayer);
         Debug.Log(dodgeball);
         spriteAnim.SetTrigger("Grab");
-
+        StartCoroutine(Grab());
         if (dodgeball)
         {
                 catchedBall = dodgeball.tag;
@@ -83,6 +83,11 @@ public class PlayerMovement : MonoBehaviour
                 Sprite ball = dodgeball.GetComponent <SpriteRenderer>().sprite;
                 PickupBall(ball);
         }
+    }
+
+    void OnPause()
+    {
+        GameManager.Instance.TogglePause();
     }
 
     void OnShoot(InputValue val)
@@ -110,13 +115,21 @@ public class PlayerMovement : MonoBehaviour
         showBall.enabled = true;
     }
 
+    IEnumerator Grab()
+    {
+        rigid.velocity = Vector3.zero;
+        dashing = true;
+        yield return new WaitForSeconds(1);
+        dashing = false;
+    }
+
     void ThrowBall()
     {
         hasBall = false;
         showBall.enabled = false;
         //GameObject newDodgeball = GameObject.Instantiate(dodgeball);
         Vector2 pos = (Vector2)transform.position + (aimingDir * 1.5f);
-
+        spriteAnim.SetTrigger("Throw");
         GameObject newProj = Instantiate(projectileTypes[catchedBall]?.template, pos, Quaternion.identity);
         newProj.GetComponent<Projectile>().direction = aimingDir;
         newProj.layer = LayerMask.NameToLayer("ProjectileFromAlly");
@@ -135,6 +148,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 lastMovement = movementInput;
         movementInput = input.Get<Vector2>();
+        //Debug.Log(input);
         if(movementInput.x != 0)
         {
             spriteRenderer.flipX = movementInput.x < 0;
@@ -165,6 +179,7 @@ public class PlayerMovement : MonoBehaviour
         dashing = true;
         spriteAnim.SetBool("Dashing", true);
         rigid.velocity = movementInput * (Speed * 2f);
+        GetComponent<PlayerHealth>().BeInvincibleForTime(DashTime);
         yield return new WaitForSeconds(DashTime);
         dashing = false;
         spriteAnim.SetBool("Dashing", false);

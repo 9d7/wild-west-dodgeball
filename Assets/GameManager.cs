@@ -8,8 +8,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     private bool _paused;
+    private bool _over;
     private List<EnemyMovement> em;
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject gameOverMenu;
     private void Awake()
     {
         if(Instance)

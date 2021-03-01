@@ -54,7 +54,6 @@ public class PlayerMovement : MonoBehaviour
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
         showBall.enabled = false;
-        PickupRange = 1.75f;
     }
 
     void OnDash()
@@ -81,7 +80,8 @@ public class PlayerMovement : MonoBehaviour
                 Destroy(dodgeball.gameObject);
                 ballInHand = dodgeball.gameObject;
                 Sprite ball = dodgeball.GetComponent <SpriteRenderer>().sprite;
-                PickupBall(ball);
+                
+                PickupBall(ball, dodgeball.transform);
         }
     }
 
@@ -108,11 +108,15 @@ public class PlayerMovement : MonoBehaviour
         aimingDir = (targetPos - transform.position).normalized;
     }
 
-    void PickupBall(Sprite ball)
+    void PickupBall(Sprite ball, Transform t)
     {
         hasBall = true;
         showBall.sprite = ball;
         showBall.enabled = true;
+        Transform oldParent = showBall.transform.parent;
+        showBall.transform.SetParent(null);
+        showBall.transform.localScale = t.localScale;
+        showBall.transform.SetParent(oldParent);
     }
 
     IEnumerator Grab()

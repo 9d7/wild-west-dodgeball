@@ -83,7 +83,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   projectileTypes: {fileID: 11400000, guid: 492df79b605bfe54a87a5ac6cd95f6c4, type: 2}
-  attackInterval: 2
+  attackInterval: 4
   randomSeed: 45
   enemySpawn: {fileID: 0}
   enemyZone: {fileID: 0}

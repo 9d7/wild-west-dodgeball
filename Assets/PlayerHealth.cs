@@ -9,6 +9,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private HealthUIController HealthBar;
     [SerializeField] private Collider2D damageCollider;
     private float m_health = 0;
+    public MainMenu menuController;
 
     public bool invinicible;
     // Start is called before the first frame update
@@ -42,6 +43,7 @@ public class PlayerHealth : MonoBehaviour
         {
             //Die
             GameManager.Instance.OnPlayerDied();
+            menuController.GameEnd(false);
             return true;
         }
 

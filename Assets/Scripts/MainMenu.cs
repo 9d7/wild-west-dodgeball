@@ -32,7 +32,7 @@ public class MainMenu : MonoBehaviour
     public TextMeshProUGUI EndSPackageText;
 
 
-    public int minLeft = 1;
+    public int minLeft = 0;
     public int secondLeft = 10;
     public bool timeGone = false;
 
@@ -56,13 +56,6 @@ public class MainMenu : MonoBehaviour
 
     // Update is called once per frame
 
-    void Update()
-    {
-        if ((timeDisplay != null) && !timeGone && secondLeft > 0)
-        {
-            StartCoroutine(TimerTake());
-        }
-    }
 
 
     public void OnGamePause(InputValue val)
@@ -86,28 +79,28 @@ public class MainMenu : MonoBehaviour
 
     }
 
-    public void GameEnd()
+    public void GameEnd(bool win)
     {
         Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0f;
         gameState = State.End;
 
-        if (droneHealth <= 0)
+        if (win)
         {
-            EndWinLose.sprite = EndLose;
+            
         }
         else
         {
-            EndWinLose.sprite = EndWin;
+           
         }
 
-        EndScoreText.text = gameScore.ToString();
-        EndSPackageText.text = deliveredPackage.ToString();
+        //EndScoreText.text = gameScore.ToString();
+        //EndSPackageText.text = deliveredPackage.ToString();
 
 
 
         pauseMenuPanel.SetActive(false);
-        settingPanel.SetActive(false);
+        //settingPanel.SetActive(false);
         endPanel.SetActive(true);
     }
 
@@ -168,51 +161,6 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    IEnumerator TimerTake()
-    {
-        timeGone = true;
-        yield return new WaitForSeconds(1);
-        secondLeft -= 1;
-        if (secondLeft < 10)
-        {
-            timeDisplay.text = "0" + minLeft + ":0" + secondLeft;
-        }
-        else
-        {
-            timeDisplay.text = "0" + minLeft + ":" + secondLeft;
-        }
-        if (secondLeft == 0)
-        {
-            if (minLeft == 0)
-            {
-                GameEnd();
-            }
-            else
-            {
-                minLeft -= 1;
-                secondLeft = 60;
-            }
-        }
-        timeGone = false;
-    }
-
-    public void SetHealth(int health)
-    {
-        healthBar.value = health;
-        droneHealth = health;
-        if (droneHealth <= 0)
-        {
-            droneHealth = 0;
-            GameEnd();
-        }
-    }
-
-    public void SetMaxHealth(int health)
-    {
-        healthBar.maxValue = health;
-        healthBar.value = health;
-        droneHealth = health;
-    }
 
     public void UpdateGUI(int score, int delivered)
     {

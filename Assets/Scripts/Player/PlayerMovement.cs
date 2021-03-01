@@ -128,6 +128,7 @@ public class PlayerMovement : MonoBehaviour
         newProj.GetComponent<Rigidbody2D>().velocity = aimingDir * 50;
         Debug.Log(newProj.GetComponent<Rigidbody2D>().velocity);
         */
+
     }
 
     void OnMove(InputValue input)

@@ -2940,7 +2940,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 0
   enemyMaxCount: 3
-  totalEnemyBeforeBoss: 4
+  totalEnemyBeforeBoss: 10
   spawnInterval: 1
 --- !u!4 &1480891301
 Transform:
@@ -3500,6 +3500,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 0}
   gameOverMenu: {fileID: 0}
+  numberOfEnemiesToKill: 0
 --- !u!4 &1819802718
 Transform:
   m_ObjectHideFlags: 0

@@ -36,6 +36,7 @@ public class EnemyMovement : MonoBehaviour
     public EnemySpawn enemySpawn;
     public GameObject enemyZone;
 
+    public MainMenu menuController;
 
     enum enemy_state
     {
@@ -212,6 +213,10 @@ public class EnemyMovement : MonoBehaviour
                 SendMessage("EnemyDie");
                 Destroy(enemyZone);
                 enemySpawn.enemyDied();
+                if(gameObject.tag == "boss")
+                {
+                    menuController.GameEnd(true);
+                }
             }
         }
     }

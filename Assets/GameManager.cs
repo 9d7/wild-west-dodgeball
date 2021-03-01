@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject gameOverMenu;
 
     [SerializeField] private int numberOfEnemiesToKill;
+    [SerializeField] private GameObject bossPrefab;
     private void Awake()
     {
         if(Instance)
@@ -21,6 +22,8 @@ public class GameManager : MonoBehaviour
         Instance = this;
         em = new List<EnemyMovement>();
     }
+
+    private int enemyDeathCount = 0;
 
     public void TogglePause()
     {
@@ -32,9 +35,10 @@ public class GameManager : MonoBehaviour
     public void OnEnemyDied(EnemyMovement en)
     {
         em.Remove(en);
-        if (em.Count == 0)
+        enemyDeathCount++;
+        if (enemyDeathCount == 6)
         {
-            OnWin();
+            GameObject.Instantiate(bossPrefab);
         }
     }
 

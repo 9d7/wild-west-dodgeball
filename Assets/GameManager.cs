@@ -7,13 +7,22 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    private bool _paused;
     private List<EnemyMovement> em;
+    [SerializeField] private GameObject pauseMenu;
     private void Awake()
     {
         if(Instance)
             Destroy(gameObject);
         Instance = this;
         em = new List<EnemyMovement>();
+    }
+
+    public void TogglePause()
+    {
+        _paused = !_paused;
+        Time.timeScale = _paused ? 0 : 1;
+        pauseMenu.SetActive(_paused);
     }
 
     public void OnEnemyDied(EnemyMovement en)

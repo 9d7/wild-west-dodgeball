@@ -136,7 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 0}
   speed: 5
-  turnSpeed: 10
+  turnSpeed: 1
   turning: 0
-  shotsPerTurn: 3.883222
+  shotsPerTurn: 30
   bullet: {fileID: 6762030996130428167, guid: 6cd0e4b8c49b5774d96a8f2c7e758885, type: 3}

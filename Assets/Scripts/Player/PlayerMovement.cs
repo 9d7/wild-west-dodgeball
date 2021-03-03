@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform showBallParent;
     [SerializeField] private Camera playerCam;
     [SerializeField] private GameObject dodgeball;
+    [SerializeField] private float DashMultiplier = 2;
 
     [Header("Animation")]
     [SerializeField] private Animator spriteAnim;
@@ -180,7 +181,7 @@ public class PlayerMovement : MonoBehaviour
         canDash = false;
         dashing = true;
         spriteAnim.SetBool("Dashing", true);
-        rigid.velocity = movementInput * (Speed * 2f);
+        rigid.velocity = movementInput * (Speed * DashMultiplier);
         GetComponent<PlayerHealth>().BeInvincibleForTime(DashTime);
         yield return new WaitForSeconds(DashTime);
         dashing = false;

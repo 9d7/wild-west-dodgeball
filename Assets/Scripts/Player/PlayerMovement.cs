@@ -134,10 +134,11 @@ public class PlayerMovement : MonoBehaviour
         //GameObject newDodgeball = GameObject.Instantiate(dodgeball);
         Vector2 pos = (Vector2)transform.position + (aimingDir * 1.5f);
         GameObject newProj = Instantiate(projectileTypes[catchedBall]?.template, pos, Quaternion.identity);
-        newProj.GetComponent<Projectile>().direction = aimingDir;
+        Projectile proj = newProj.GetComponent<Projectile>();
+        proj.direction = aimingDir;
         newProj.layer = LayerMask.NameToLayer("ProjectileFromAlly");
-        newProj.GetComponent<SpriteRenderer>().color = Color.yellow;
-
+        proj.speed = 50;
+        proj.thrownByPlayer = true;
         /*
         newProj.transform.position = transform.position + (Vector3)(aimingDir * 1.5f);
         Debug.Log(aimingDir);

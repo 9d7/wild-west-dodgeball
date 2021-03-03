@@ -14,6 +14,7 @@ public class Projectile : MonoBehaviour
     protected float existTime = 10f;
     public AudioClip collideSound;
     [SerializeField] private GameObject tempSound;
+    public bool thrownByPlayer;
 
 
     private Rigidbody2D rigid;
@@ -47,13 +48,13 @@ public class Projectile : MonoBehaviour
 
     protected void HitPlayer(Collision2D other, float damage)
     {
-        if(gameObject.layer == LayerMask.NameToLayer("ProjectileFromEnemy"))
+        if (thrownByPlayer)
+            return;
+        var ph = other.collider.GetComponentInParent<PlayerHealth>();
+        if (ph)
         {
-            PlayerHealth ph = other.collider.GetComponentInParent<PlayerHealth>();
-            if (ph)
-            {
-                ph.TakeDamage(damage);
-            }
+            Debug.Log("TOOK DAMAGE FROM BOTTLE");
+            ph.TakeDamage(damage);
         }
     }
 

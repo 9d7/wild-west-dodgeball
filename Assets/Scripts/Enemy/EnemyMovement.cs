@@ -11,7 +11,7 @@ public class EnemyMovement : MonoBehaviour
     public float moveAccel = 1;
     public float stopDistance;
     public float retreatDistance;
-    public float attackRange = 15;
+    public float attackRange = 5;
 
     public bool targetPlayer;
     private Transform player;
@@ -63,7 +63,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if (state == enemy_state.IDLE)
         {
-            state = enemy_state.PATROL;
+            //state = enemy_state.PATROL;
             if (Vector2.Distance(transform.position, player.position) < attackRange)
             {
                 state = enemy_state.PATROL;
@@ -80,8 +80,8 @@ public class EnemyMovement : MonoBehaviour
             attackTime -= Time.deltaTime;
             if (Vector2.Distance(transform.position, player.position) > attackRange)
             {
-                //attackTime = attackInterval;
-                //state = enemy_state.IDLE;
+                attackTime = attackInterval;
+                state = enemy_state.IDLE;
             }
         }
     }
@@ -91,12 +91,14 @@ public class EnemyMovement : MonoBehaviour
     {
         if (state == enemy_state.PATROL)
         {
-            wanderFunc();
+            //wanderFunc();
+            randomWalk();
             //lissajous_curve(5, 2, 5, 4, Mathf.PI / 4);
         } else if (state == enemy_state.ATTACK)
         {
-            wanderFunc();
+            //wanderFunc();
             //rbody.velocity = new Vector3(0, 0, 0);
+            randomWalk();
         }
 
     }
@@ -162,6 +164,19 @@ public class EnemyMovement : MonoBehaviour
         rbody.velocity = move_path;
     }
 
+    void randomWalk()
+    {
+        if (waitTime <= 0)
+        {
+            waitTime = startWaitTime;
+            Vector3 walkdirection = new Vector3(Random.Range(-100, 100), Random.Range(-100, 100), 0).normalized;
+            rbody.velocity = Vector3.MoveTowards(rbody.velocity, walkdirection * moveSpeed, moveAccel);
+        } else
+        {
+            waitTime -= Time.deltaTime;
+        }
+    }
+
     IEnumerator AttackReady()
     {
         state = enemy_state.ATTACK;
@@ -186,20 +201,22 @@ public class EnemyMovement : MonoBehaviour
 
     void BasicAttack(Vector2 pos, Vector2 playerPos)
     {
+        Vector2 enemyToPlayer = (playerPos - pos).normalized;
+        pos = pos + enemyToPlayer;
         if (this.tag == "boss")
         {
-            Shoot(pos, (playerPos - pos).normalized + new Vector2(0.5f, 0.5f), "gun");
-            Shoot(pos, (playerPos - pos).normalized - new Vector2(0.5f, 0.5f), "gun");
+            Shoot(pos, enemyToPlayer + new Vector2(0.5f, 0.5f), "gun");
+            Shoot(pos, enemyToPlayer - new Vector2(0.5f, 0.5f), "gun");
         }
         else
         {
             if (Random.value < 0.8f)
             {
-                Shoot(pos, (playerPos - pos).normalized, "bottle");
+                Shoot(pos, enemyToPlayer, "bottle");
             }
             else
             {
-                Shoot(pos, (playerPos - pos).normalized, "gun");
+                Shoot(pos, enemyToPlayer, "gun");
             }
         }
     }

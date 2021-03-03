@@ -14,7 +14,12 @@ public class EnemySpawn : MonoBehaviour
     public float spawnInterval = 1f;
     private bool spawning = false;
     private bool bossSpawn = false;
-    
+
+    public int enemyGroupNum = 3;
+    public int enemyRound = 3;
+
+    private Vector3 groupPos;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,10 +30,11 @@ public class EnemySpawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (totalEnemyBeforeBoss > 0)
+        if (enemyRound > 0)
         {
-            if ((enemyCount < enemyMaxCount) && (!spawning))
+            if ((enemyCount == 0) && (!spawning))
             {
+                enemyRound--;
                 StartCoroutine(Spawn());
             }
         } else
@@ -54,9 +60,12 @@ public class EnemySpawn : MonoBehaviour
         spawning = true;
         xPos = Random.Range(-20, 40);
         yPos = Random.Range(-5, 10);
-        Instantiate(enemy, new Vector3(xPos, yPos, 0), Quaternion.identity);
-        enemyCount += 1;
-        totalEnemyBeforeBoss -= 1;
+        groupPos = new Vector3(xPos, yPos, 0);
+        for(int i = 0; i < enemyGroupNum; i++)
+        {
+            Instantiate(enemy, groupPos + new Vector3(Random.value, Random.Range(-2,2)), Quaternion.identity);
+            enemyCount += 1;
+        }
         yield return new WaitForSeconds(spawnInterval);
         spawning = false;
     }

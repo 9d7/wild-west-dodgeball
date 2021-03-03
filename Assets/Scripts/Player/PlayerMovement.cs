@@ -70,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
         if (dashing)
             return;
         Collider2D dodgeball = Physics2D.OverlapCircle(transform.position, PickupRange, (int)PickupLayer);
-        Debug.Log(dodgeball);
+        //Debug.Log(dodgeball);
         spriteAnim.SetTrigger("Grab");
         StartCoroutine(Grab());
         if (dodgeball)

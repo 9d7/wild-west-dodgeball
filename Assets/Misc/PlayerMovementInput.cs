@@ -65,6 +65,14 @@ public class @PlayerMovementInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Inventory"",
+                    ""type"": ""Value"",
+                    ""id"": ""e2133220-93dd-4dbc-a997-4ba53e7c971c"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -254,6 +262,50 @@ public class @PlayerMovementInput : IInputActionCollection, IDisposable
                     ""action"": ""GamePause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b1e068ba-3b4e-4e88-ad7c-c2ef04f5c346"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""3028b068-dc1a-4aae-a65f-8836a5cfc6c1"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""2ce27b7c-4a95-4e25-b1dc-d01a282dcbee"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""9e2fa52f-f38f-4943-b600-edd9ca2e2d81"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -268,6 +320,7 @@ public class @PlayerMovementInput : IInputActionCollection, IDisposable
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Grab = m_Player.FindAction("Grab", throwIfNotFound: true);
         m_Player_GamePause = m_Player.FindAction("GamePause", throwIfNotFound: true);
+        m_Player_Inventory = m_Player.FindAction("Inventory", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -323,6 +376,7 @@ public class @PlayerMovementInput : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_Grab;
     private readonly InputAction m_Player_GamePause;
+    private readonly InputAction m_Player_Inventory;
     public struct PlayerActions
     {
         private @PlayerMovementInput m_Wrapper;
@@ -333,6 +387,7 @@ public class @PlayerMovementInput : IInputActionCollection, IDisposable
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @Grab => m_Wrapper.m_Player_Grab;
         public InputAction @GamePause => m_Wrapper.m_Player_GamePause;
+        public InputAction @Inventory => m_Wrapper.m_Player_Inventory;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -360,6 +415,9 @@ public class @PlayerMovementInput : IInputActionCollection, IDisposable
                 @GamePause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGamePause;
                 @GamePause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGamePause;
                 @GamePause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGamePause;
+                @Inventory.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventory;
+                @Inventory.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventory;
+                @Inventory.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventory;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -382,6 +440,9 @@ public class @PlayerMovementInput : IInputActionCollection, IDisposable
                 @GamePause.started += instance.OnGamePause;
                 @GamePause.performed += instance.OnGamePause;
                 @GamePause.canceled += instance.OnGamePause;
+                @Inventory.started += instance.OnInventory;
+                @Inventory.performed += instance.OnInventory;
+                @Inventory.canceled += instance.OnInventory;
             }
         }
     }
@@ -394,5 +455,6 @@ public class @PlayerMovementInput : IInputActionCollection, IDisposable
         void OnDash(InputAction.CallbackContext context);
         void OnGrab(InputAction.CallbackContext context);
         void OnGamePause(InputAction.CallbackContext context);
+        void OnInventory(InputAction.CallbackContext context);
     }
 }

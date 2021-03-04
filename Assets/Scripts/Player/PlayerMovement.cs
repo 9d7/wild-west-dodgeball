@@ -24,11 +24,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Camera playerCam;
     [SerializeField] private GameObject dodgeball;
     [SerializeField] private float DashMultiplier = 2;
-
+    
     [Header("Animation")]
-    [SerializeField] private Animator spriteAnim;
+    [SerializeField] public Animator spriteAnim;
     [SerializeField] private SpriteRenderer spriteRenderer;
     public ProjectileTypes projectileTypes;
+
+    [Header("UI")] [SerializeField] private InventoryUI _inventoryUI;
 
     private GameObject ballInHand;
     private Vector2 aimingDir;
@@ -72,6 +74,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         Collider2D dodgeball = Physics2D.OverlapCircle(transform.position, PickupRange, (int)PickupLayer);
         //Debug.Log(dodgeball);
+        
         spriteAnim.SetTrigger("Grab");
         StartCoroutine(Grab());
         if (dodgeball)
@@ -81,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
                 Destroy(dodgeball.gameObject);
                 ballInHand = dodgeball.gameObject;
                 Sprite ball = dodgeball.GetComponent <SpriteRenderer>().sprite;
-                
+                _inventoryUI.PickUp(dodgeball.tag);
                 PickupBall(ball, dodgeball.transform);
         }
     }
@@ -94,11 +97,23 @@ public class PlayerMovement : MonoBehaviour
     void OnShoot(InputValue val)
     {
         spriteAnim.SetTrigger("Throw");
-        if (!hasBall)
-            return;
         ThrowBall();
 
     }
+
+    void OnInventory(InputValue val)
+    {
+        Debug.Log("something");
+        if (val.Get<float>() > 0)
+        {
+            _inventoryUI.UpSlot();
+        }
+        else if (val.Get<float>() < 0)
+        {
+            _inventoryUI.DownSlot();
+        }
+    }
+
 
     void OnAim(InputValue input)
     {
@@ -112,7 +127,6 @@ public class PlayerMovement : MonoBehaviour
 
     void PickupBall(Sprite ball, Transform t)
     {
-        hasBall = true;
         showBall.sprite = ball;
         showBall.enabled = true;
         Transform oldParent = showBall.transform.parent;
@@ -129,7 +143,8 @@ public class PlayerMovement : MonoBehaviour
 
     void ThrowBall()
     {
-        hasBall = false;
+        if (!_inventoryUI.UseCurrent())
+            return;
         showBall.enabled = false;
         //GameObject newDodgeball = GameObject.Instantiate(dodgeball);
         Vector2 pos = (Vector2)transform.position + (aimingDir * 1.5f);
@@ -190,6 +205,8 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(DashRecoveryTime);
         canDash = true;
     }
+
+
 
     private void Update()
     {

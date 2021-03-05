@@ -107,10 +107,12 @@ public class PlayerMovement : MonoBehaviour
         if (val.Get<float>() > 0)
         {
             _inventoryUI.UpSlot();
+            showBall.sprite = _inventoryUI.GetCurrentSprite();
         }
         else if (val.Get<float>() < 0)
         {
             _inventoryUI.DownSlot();
+            showBall.sprite = _inventoryUI.GetCurrentSprite();
         }
     }
 
@@ -152,7 +154,7 @@ public class PlayerMovement : MonoBehaviour
         Projectile proj = newProj.GetComponent<Projectile>();
         proj.direction = aimingDir;
         newProj.layer = LayerMask.NameToLayer("ProjectileFromAlly");
-        proj.speed = 50;
+        proj.speed = 30;
         proj.thrownByPlayer = true;
         /*
         newProj.transform.position = transform.position + (Vector3)(aimingDir * 1.5f);
@@ -210,9 +212,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (hasBall)
-        {
-            showBallParent.rotation = Quaternion.Euler(0, 0, Vector3.Angle(Vector3.up, aimingDir) * Mathf.Sign(Vector3.Cross(Vector3.up, aimingDir).z));
-        }
+        showBallParent.rotation = Quaternion.Euler(0, 0, Vector3.Angle(Vector3.up, aimingDir) * Mathf.Sign(Vector3.Cross(Vector3.up, aimingDir).z));
     }
 }

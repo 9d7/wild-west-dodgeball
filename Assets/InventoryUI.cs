@@ -29,6 +29,11 @@ public class InventoryUI : MonoBehaviour
         projectileImages[index].sprite = inventory[index].sprite;
     }
 
+    public Sprite GetCurrentSprite()
+    {
+        return projectileImages[index].sprite;
+    }
+
     public bool UseCurrent()
     {
         if (projectileImages[index].enabled)

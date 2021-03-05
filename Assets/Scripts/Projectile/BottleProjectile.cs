@@ -11,6 +11,8 @@ public class BottleProjectile : Projectile
     private float timer = 0f;
 
     private float secondsPerShot;
+
+    [SerializeField] private GameObject shatterEffect;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +39,7 @@ public class BottleProjectile : Projectile
         base.OnCollisionEnter2D(other);
         if (state == projState.INTHEAIR)
         {
+            Destroy(GameObject.Instantiate(shatterEffect, transform.position, shatterEffect.transform.rotation), 1);
             HitPlayer(other, 10f);
             Destroy(gameObject);
         }

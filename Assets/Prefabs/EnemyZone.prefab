@@ -69,11 +69,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1
-  moveSpeed: 0.2
+  moveSpeed: 1
   moveAccel: 1
   stopDistance: 6
   retreatDistance: 3
-  attackRange: 15
+  attackRange: 20
   targetPlayer: 0
   startWaitTime: 1
   moveSpots:

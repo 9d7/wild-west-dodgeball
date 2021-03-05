@@ -61,10 +61,10 @@ public class EnemyMovement : MonoBehaviour
     }
     private void Update()
     {
-        Debug.Log(Vector2.Distance(transform.position, player.position));
+        //Debug.Log(Vector2.Distance(transform.position, player.position));
         if (state == enemy_state.IDLE)
         {
-            Debug.Log("IDLING");
+            //Debug.Log("IDLING");
             //state = enemy_state.PATROL;
             if (Vector2.Distance(transform.position, player.position) < attackRange)
             {
@@ -231,6 +231,7 @@ public class EnemyMovement : MonoBehaviour
             {
                 SendMessage("EnemyDie");
                 Destroy(enemyZone);
+                Destroy(gameObject);
                 enemySpawn.enemyDied();
                 if(gameObject.tag == "boss")
                 {

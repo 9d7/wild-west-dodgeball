@@ -64,7 +64,7 @@ public class EnemySpawn : MonoBehaviour
         groupPos = new Vector3(xPos, yPos, 0);
         for(int i = 0; i < enemyGroupNum; i++)
         {
-            Instantiate(enemy, groupPos + new Vector3(Random.value, Random.Range(-2,2)), Quaternion.identity);
+            Instantiate(enemy, groupPos + new Vector3(Random.value, Random.Range(-4,4)), Quaternion.identity);
             enemyCount += 1;
         }
         yield return new WaitForSeconds(spawnInterval);
@@ -73,7 +73,7 @@ public class EnemySpawn : MonoBehaviour
 
     public void enemyDied()
     {
-        Debug.Log(enemyCount);
+        //Debug.Log(enemyCount);
         enemyCount -= 1;
     }
 }

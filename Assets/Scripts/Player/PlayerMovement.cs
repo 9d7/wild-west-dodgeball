@@ -80,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
         if (dodgeball)
         {
                 catchedBall = dodgeball.tag;
-                Debug.Log(catchedBall);
+                //Debug.Log(catchedBall);
                 Destroy(dodgeball.gameObject);
                 ballInHand = dodgeball.gameObject;
                 Sprite ball = dodgeball.GetComponent <SpriteRenderer>().sprite;
@@ -103,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnInventory(InputValue val)
     {
-        Debug.Log("something");
+        //Debug.Log("something");
         if (val.Get<float>() > 0)
         {
             _inventoryUI.UpSlot();

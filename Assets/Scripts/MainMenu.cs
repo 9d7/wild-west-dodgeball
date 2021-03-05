@@ -19,7 +19,8 @@ public class MainMenu : MonoBehaviour
     State gameState = State.Playing;
     public GameObject pauseMenuPanel;
     public GameObject settingPanel;
-    public GameObject endPanel;
+    public GameObject endPanelWin;
+    public GameObject endPanelLose;
 
     public TextMeshProUGUI timeDisplay;
     public TextMeshProUGUI ScoreText;
@@ -84,24 +85,19 @@ public class MainMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0f;
         gameState = State.End;
-
+        pauseMenuPanel.SetActive(false);
         if (win)
         {
-            
+            endPanelWin.SetActive(true);
         }
         else
         {
-           
+            endPanelLose.SetActive(true);
         }
 
         //EndScoreText.text = gameScore.ToString();
-        //EndSPackageText.text = deliveredPackage.ToString();
-
-
-
-        pauseMenuPanel.SetActive(false);
+        //EndSPackageText.text = deliveredPackage.ToString();  
         //settingPanel.SetActive(false);
-        endPanel.SetActive(true);
     }
 
     public void Resume()

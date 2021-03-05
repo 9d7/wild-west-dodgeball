@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneTemplate;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -57,14 +58,15 @@ public class EnemyMovement : MonoBehaviour
         attackTime = attackInterval + Random.Range(-(attackInterval)/4, (attackInterval)/4);
         player = GameObject.FindWithTag("Player").transform;
         Random.InitState(randomSeed);
-        nextMovingSpot = moveSpots[Random.Range(0, moveSpots.Length)].position;
+        //nextMovingSpot = moveSpots[Random.Range(0, moveSpots.Length)].position;
+        state = enemy_state.ATTACK;
+        StartCoroutine(DoAttackLoop());
     }
     private void Update()
     {
-        Debug.Log(Vector2.Distance(transform.position, player.position));
+        /*Debug.Log(Vector2.Distance(transform.position, player.position));
         if (state == enemy_state.IDLE)
         {
-            Debug.Log("IDLING");
             //state = enemy_state.PATROL;
             if (Vector2.Distance(transform.position, player.position) < attackRange)
             {
@@ -85,24 +87,22 @@ public class EnemyMovement : MonoBehaviour
                 attackTime = attackInterval + Random.Range(-(attackInterval)/4, (attackInterval)/4);
                 state = enemy_state.IDLE;
             }
+        }*/
+    }
+
+    IEnumerator DoAttackLoop()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(attackInterval + Random.Range(-(attackInterval) / 4, (attackInterval) / 4));
+            BasicAttack(gameObject.transform.position, player.position);
         }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (state == enemy_state.PATROL)
-        {
-            //wanderFunc();
-            randomWalk();
-            //lissajous_curve(5, 2, 5, 4, Mathf.PI / 4);
-        } else if (state == enemy_state.ATTACK)
-        {
-            //wanderFunc();
-            //rbody.velocity = new Vector3(0, 0, 0);
-            randomWalk();
-        }
-
+        randomWalk();
     }
 
 
@@ -166,17 +166,20 @@ public class EnemyMovement : MonoBehaviour
         rbody.velocity = move_path;
     }
 
+    private Vector3 walkdirection;
     void randomWalk()
     {
+        
         if (waitTime <= 0)
         {
             waitTime = startWaitTime;
-            Vector3 walkdirection = new Vector3(Random.Range(-100, 100), Random.Range(-100, 100), 0).normalized;
-            rbody.velocity = Vector3.MoveTowards(rbody.velocity, walkdirection * moveSpeed, moveAccel);
+            walkdirection = new Vector3(Random.Range(-100, 100), Random.Range(-100, 100), 0).normalized;
+            
         } else
         {
             waitTime -= Time.deltaTime;
         }
+        rbody.velocity = Vector3.MoveTowards(rbody.velocity, walkdirection * moveSpeed, moveAccel);
     }
 
     IEnumerator AttackReady()
@@ -197,6 +200,7 @@ public class EnemyMovement : MonoBehaviour
             Quaternion.identity
         );
         newProj.GetComponent<Projectile>().direction = direction;
+        newProj.GetComponent<Projectile>().speed = 12;
         SendMessage("EnemyShoot");
         //newProj.layer = LayerMask.NameToLayer("ProjectileFromEnemy");
     }
@@ -212,7 +216,7 @@ public class EnemyMovement : MonoBehaviour
         }
         else
         {
-            if (Random.value < 0.8f)
+            if (Random.value < 0.5f)
             {
                 Shoot(pos, enemyToPlayer, "bottle");
             }
@@ -226,6 +230,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if(other.collider.gameObject.layer == LayerMask.NameToLayer("ProjectileFromAlly"))
         {
+            Debug.Log("took hit");
             health -= 1;
             if(health <= 0)
             {

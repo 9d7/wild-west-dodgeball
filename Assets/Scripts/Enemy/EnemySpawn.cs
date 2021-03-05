@@ -6,14 +6,16 @@ public class EnemySpawn : MonoBehaviour
 {
     public GameObject enemy;
     public GameObject boss;
-    public int xPos;
-    public int yPos;
+    public float xPos;
+    public float yPos;
     private int enemyCount;
     public int enemyMaxCount;
+    public int enemyMinCount;
     public int totalEnemyBeforeBoss = 10;
     public float spawnInterval = 1f;
     private bool spawning = false;
     private bool bossSpawn = false;
+    [SerializeField] private RectTransform spawnRange;
 
     public int enemyGroupNum = 3;
     public int enemyRound = 3;
@@ -58,10 +60,11 @@ public class EnemySpawn : MonoBehaviour
     IEnumerator Spawn()
     {
         spawning = true;
-        xPos = Random.Range(-20, 40);
-        yPos = Random.Range(-5, 10);
+        xPos = Random.Range(spawnRange.anchorMin.x, spawnRange.anchorMax.x);
+        yPos = Random.Range(spawnRange.anchorMin.y, spawnRange.anchorMax.y);
         groupPos = new Vector3(xPos, yPos, 0);
-        for(int i = 0; i < enemyGroupNum; i++)
+        int count = Random.Range(enemyMinCount, enemyMaxCount);
+        for(int i = 0; i < count; i++)
         {
             Instantiate(enemy, groupPos + new Vector3(Random.value, Random.Range(-2,2)), Quaternion.identity);
             enemyCount += 1;
@@ -72,7 +75,6 @@ public class EnemySpawn : MonoBehaviour
 
     public void enemyDied()
     {
-        Debug.Log(enemyCount);
         enemyCount -= 1;
     }
 }

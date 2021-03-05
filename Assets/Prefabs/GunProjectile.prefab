@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 7657258027716908953}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.36, y: 0.00999999, z: -1.21}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f1413f8df9197f9478b46225603325fd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e21a8f25e1c595d41ad0a35c69a0f108, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -121,7 +121,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.21
+  m_Radius: 0.15423018
 --- !u!114 &4077705013455607300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,11 +136,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 0}
   speed: 5
-  turnSpeed: 1
+  turnSpeed: 5
   turning: 0
   collideSound: {fileID: 0}
   tempSound: {fileID: 0}
-  shotsPerTurn: 30
+  thrownByPlayer: 0
+  shotsPerTurn: 10
   bullet: {fileID: 6762030996130428167, guid: 6cd0e4b8c49b5774d96a8f2c7e758885, type: 3}
   shootSound: {fileID: 8300000, guid: 7862654150a3385408e428548415f157, type: 3}
   tempAudio: {fileID: 2038119517885338936, guid: d9898f80a7ee29a419d25358888a10c6, type: 3}

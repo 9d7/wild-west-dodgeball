@@ -15,9 +15,13 @@ MonoBehaviour:
   types:
   - name: test
     template: {fileID: 4499758663097390854, guid: 5455b822464c6974984e9dfc22ccb8ec, type: 3}
+    sprite: {fileID: 0}
   - name: gun
     template: {fileID: 7657258027716908953, guid: 911841fe151a3d844a976aaa3c6f08d4, type: 3}
+    sprite: {fileID: 0}
   - name: dodgeball
     template: {fileID: 6728786363412524262, guid: 247671a036c77764fb8fbdc979f5b105, type: 3}
+    sprite: {fileID: 0}
   - name: bottle
     template: {fileID: 6573014302487636536, guid: 8bb497112ac45b74390f4b13663dc77d, type: 3}
+    sprite: {fileID: 2038873943642995862, guid: 96c449e2dabf6ee48a357006d66adac8, type: 3}

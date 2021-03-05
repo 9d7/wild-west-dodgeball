@@ -53,7 +53,6 @@ public class Projectile : MonoBehaviour
         var ph = other.collider.GetComponentInParent<PlayerHealth>();
         if (ph)
         {
-            Debug.Log("TOOK DAMAGE FROM BOTTLE");
             ph.TakeDamage(damage);
         }
     }

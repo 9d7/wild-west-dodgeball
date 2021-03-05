@@ -8,6 +8,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float MaxHealth = 100;
     [SerializeField] private HealthUIController HealthBar;
     [SerializeField] private Collider2D damageCollider;
+    [SerializeField] private float DamageAnimTime = 1;
     private float m_health = 0;
     public MainMenu menuController;
 
@@ -33,13 +34,22 @@ public class PlayerHealth : MonoBehaviour
         damageCollider.enabled = true;
         invinicible = false;
     }
+    
+    private IEnumerator HurtRoutine()
+    {
+        BeInvincibleForTime(DamageAnimTime);
+        GetComponent<PlayerMovement>().spriteAnim.SetBool("Hurt", true);
+        yield return new WaitForSeconds(DamageAnimTime);
+        GetComponent<PlayerMovement>().spriteAnim.SetBool("Hurt", false);
+    }
+    
     public bool TakeDamage(float amt)
     {
         if (invinicible)
             return false;
         m_health = Mathf.Clamp(m_health - amt, 0, MaxHealth);
         UpdateUI();
-        Debug.Log(m_health);
+        StartCoroutine(HurtRoutine());
         if (m_health == 0)
         {
             //Die

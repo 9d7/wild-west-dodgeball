@@ -54,15 +54,17 @@ public class EnemyMovement : MonoBehaviour
         rbody = GetComponent<Rigidbody2D>();
         GameManager.Instance.RegisterEnemy(this);
         waitTime = startWaitTime;
-        attackTime = attackInterval;
+        attackTime = attackInterval + Random.Range(-(attackInterval)/4, (attackInterval)/4);
         player = GameObject.FindWithTag("Player").transform;
         Random.InitState(randomSeed);
         nextMovingSpot = moveSpots[Random.Range(0, moveSpots.Length)].position;
     }
     private void Update()
     {
+        Debug.Log(Vector2.Distance(transform.position, player.position));
         if (state == enemy_state.IDLE)
         {
+            Debug.Log("IDLING");
             //state = enemy_state.PATROL;
             if (Vector2.Distance(transform.position, player.position) < attackRange)
             {
@@ -73,14 +75,14 @@ public class EnemyMovement : MonoBehaviour
         {
             if (attackTime <= Random.value)
             {
-                attackTime = attackInterval;
+                attackTime = attackInterval + Random.Range(-(attackInterval)/4, (attackInterval)/4);
                 StartCoroutine(AttackReady());
 
             }
             attackTime -= Time.deltaTime;
             if (Vector2.Distance(transform.position, player.position) > attackRange)
             {
-                attackTime = attackInterval;
+                attackTime = attackInterval + Random.Range(-(attackInterval)/4, (attackInterval)/4);
                 state = enemy_state.IDLE;
             }
         }
@@ -145,7 +147,7 @@ public class EnemyMovement : MonoBehaviour
                 */
                 randomSpot = randomSpot_tmp;
                 //Vector3 potNextSpot = new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), Random.Range(-1, 1));
-                nextMovingSpot = transform.position + new Vector3(Random.Range(-1,1), Random.Range(-1, 1), Random.Range(-1, 1));
+                nextMovingSpot = transform.position + new Vector3(Random.Range(-5,5), Random.Range(-5, 5), Random.Range(-5, 5));
                 waitTime = startWaitTime;
             } else
             {

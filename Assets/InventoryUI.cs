@@ -12,6 +12,7 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private Transform chamberTransform;
     [SerializeField] private ProjectileTypes projectileTypes;
     private ProjectileType[] inventory;
+    private string[] inventoryKey;
     [SerializeField] private Image[] projectileImages;
 
     private float degreesPerChamber;
@@ -20,12 +21,14 @@ public class InventoryUI : MonoBehaviour
     {
         degreesPerChamber = 360f / numOfChambers;
         inventory = new ProjectileType[6];
+        inventoryKey = new string[6];
     }
 
     public void PickUp(string key)
     {
         projectileImages[index].enabled = true;
         inventory[index] = projectileTypes[key].GetValueOrDefault();
+        inventoryKey[index] = key;
         projectileImages[index].sprite = inventory[index].sprite;
     }
 
@@ -34,16 +37,16 @@ public class InventoryUI : MonoBehaviour
         return projectileImages[index].sprite;
     }
 
-    public bool UseCurrent()
+    public string UseCurrent()
     {
         if (projectileImages[index].enabled)
         {
             projectileImages[index].enabled = false;
             projectileImages[index].sprite = null;
-            return true;
+            return inventoryKey[index];
         }
 
-        return false;
+        return null;
     }
 
 

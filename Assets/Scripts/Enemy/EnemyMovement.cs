@@ -218,13 +218,13 @@ public class EnemyMovement : MonoBehaviour
         }
         else
         {
-            if (Random.value < 0.9f)
+            if (Random.value < 0.5f)
             {
                 Shoot(pos, enemyToPlayer, "bottle");
             }
             else
             {
-                Shoot(pos, enemyToPlayer, "gun");
+                Shoot(pos, enemyToPlayer, "barrel");
             }
         }
     }

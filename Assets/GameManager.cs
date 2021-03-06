@@ -49,12 +49,14 @@ public class GameManager : MonoBehaviour
 
     public void OnEnemyDied(EnemyMovement en)
     {
+        /*
         em.Remove(en);
         enemyDeathCount++;
         if (enemyDeathCount == 6)
         {
             GameObject.Instantiate(bossPrefab);
         }
+        */
     }
 
     public void RegisterEnemy(EnemyMovement en)

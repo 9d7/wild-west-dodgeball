@@ -9,6 +9,7 @@ TagManager:
   - bottle
   - boss
   - menController
+  - barrel
   layers:
   - Default
   - TransparentFX

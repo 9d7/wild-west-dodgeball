@@ -25,3 +25,6 @@ MonoBehaviour:
   - name: bottle
     template: {fileID: 6573014302487636536, guid: 8bb497112ac45b74390f4b13663dc77d, type: 3}
     sprite: {fileID: 2038873943642995862, guid: 96c449e2dabf6ee48a357006d66adac8, type: 3}
+  - name: barrel
+    template: {fileID: 4752828045877808597, guid: 41fe164f578f6ad46834d9439e4c02a1, type: 3}
+    sprite: {fileID: 21300000, guid: 5b0c9be204aff39419695e742dc82352, type: 3}

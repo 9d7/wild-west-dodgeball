@@ -20,8 +20,6 @@ public class GunProjectile : Projectile
     {
         InitObject();
         secondsPerShot = Mathf.PI * 2f / (float)(turnSpeed * shotsPerTurn);
-        Debug.Log(secondsPerShot);
-
     }
 
     // Update is called once per frame

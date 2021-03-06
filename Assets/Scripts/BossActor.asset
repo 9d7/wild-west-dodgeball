@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4d0015a118b9bc4899cb00b86ef4cc8, type: 3}
+  m_Name: BossActor
+  m_EditorClassIdentifier: 
+  textColor: {r: 0, g: 0.27550507, b: 0.5188679, a: 1}
+  actorImage: {fileID: 21300000, guid: e8a659b2b52f8704a91ee904a188b3c5, type: 3}
+  flippedX: 0

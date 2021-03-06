@@ -80,7 +80,6 @@ public class PlayerMovement : MonoBehaviour
         if (dodgeball)
         {
             catchedBall = dodgeball.tag;
-            Debug.Log(catchedBall);
             Destroy(dodgeball.gameObject);
             ballInHand = dodgeball.gameObject;
             Sprite ball = dodgeball.GetComponent <SpriteRenderer>().sprite;

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour
@@ -16,7 +17,7 @@ public class EnemySpawn : MonoBehaviour
     private bool spawning = false;
     private bool bossSpawn = false;
     [SerializeField] private RectTransform spawnRange;
-
+    [SerializeField] private SpriteRenderer preSpawnBossSprite;
     
     public int enemyRound = 3;
 
@@ -25,6 +26,12 @@ public class EnemySpawn : MonoBehaviour
     private int enemyCount;
 
     private bool reSpawn;
+    private bool canSpawn = false;
+
+    public void StartSpawning()
+    {
+        canSpawn = true;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +43,8 @@ public class EnemySpawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!canSpawn)
+            return;
         if (enemyRound > 0)
         {
             if(enemyCount == 0)
@@ -63,6 +72,7 @@ public class EnemySpawn : MonoBehaviour
 
     void spawnBoss()
     {
+        preSpawnBossSprite.enabled = false;
         Debug.Log("BOSS");
         xPos = Random.Range(0, 20);
         yPos = Random.Range(0, 5);

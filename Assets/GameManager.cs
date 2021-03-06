@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private int numberOfEnemiesToKill;
     [SerializeField] private GameObject bossPrefab;
+    [SerializeField] private EnemySpawn enemySpawner;
+    [SerializeField] private DrawController dc;
     private void Awake()
     {
         if(Instance)
@@ -22,6 +24,19 @@ public class GameManager : MonoBehaviour
         Instance = this;
         em = new List<EnemyMovement>();
     }
+
+    public void StartAction()
+    {
+        StartCoroutine(StartActionRoutine());
+    }
+
+    IEnumerator StartActionRoutine()
+    {
+        dc.StartDrawAnim();
+        yield return new WaitForSeconds(1);
+        enemySpawner.StartSpawning();
+    }
+    
 
     private int enemyDeathCount = 0;
 

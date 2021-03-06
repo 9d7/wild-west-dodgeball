@@ -3171,13 +3171,12 @@ MonoBehaviour:
   boss: {fileID: 4097269261689413122, guid: ee1ead4660f29e04f81a7df0a0932815, type: 3}
   xPos: 0
   yPos: 0
-  enemyMaxCount: 5
-  enemyMinCount: 3
+  enemyMaxCount: 3
+  enemyMinCount: 1
   totalEnemyBeforeBoss: 10
   spawnInterval: 1
   spawnRange: {fileID: 1366665470}
-  enemyGroupNum: 3
-  enemyRound: 3
+  enemyRound: 1
 --- !u!4 &1480891301
 Transform:
   m_ObjectHideFlags: 0

@@ -34,10 +34,11 @@ public class EnemyMovement : MonoBehaviour
     public int randomSeed;
     private Vector3 nextMovingSpot;
 
-    public EnemySpawn enemySpawn;
+    
     public GameObject enemyZone;
 
-    public MainMenu menuController;
+    private EnemySpawn enemySpawn;
+    private MainMenu menuController;
 
     enum enemy_state
     {
@@ -51,6 +52,7 @@ public class EnemyMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        menuController = GameObject.FindObjectOfType<MainMenu>();
         enemySpawn = GameObject.FindObjectOfType<EnemySpawn>();
         rbody = GetComponent<Rigidbody2D>();
         GameManager.Instance.RegisterEnemy(this);
@@ -216,7 +218,7 @@ public class EnemyMovement : MonoBehaviour
         }
         else
         {
-            if (Random.value < 0.5f)
+            if (Random.value < 0.8f)
             {
                 Shoot(pos, enemyToPlayer, "bottle");
             }

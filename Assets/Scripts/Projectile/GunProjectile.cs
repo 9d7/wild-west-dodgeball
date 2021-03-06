@@ -64,6 +64,7 @@ public class GunProjectile : Projectile
     {
         if (state == projState.INTHEAIR)
         {
+            HitPlayer(other, 10f);
             Destroy(gameObject);
         }
     }

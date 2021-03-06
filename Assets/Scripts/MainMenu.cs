@@ -88,10 +88,12 @@ public class MainMenu : MonoBehaviour
         pauseMenuPanel.SetActive(false);
         if (win)
         {
+            Debug.Log("WIN");
             endPanelWin.SetActive(true);
         }
         else
         {
+            Debug.Log("LOSE");
             endPanelLose.SetActive(true);
         }
 

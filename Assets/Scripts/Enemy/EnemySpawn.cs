@@ -53,7 +53,7 @@ public class EnemySpawn : MonoBehaviour
         Debug.Log("BOSS");
         xPos = Random.Range(0, 20);
         yPos = Random.Range(0, 5);
-        Instantiate(boss, new Vector3(xPos, yPos, 0), Quaternion.identity);
+        //Instantiate(boss, new Vector3(xPos, yPos, 0), Quaternion.identity);
     }
 
     IEnumerator Spawn()

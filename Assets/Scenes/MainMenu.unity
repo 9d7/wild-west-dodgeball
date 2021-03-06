@@ -234,8 +234,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -65}
-  m_SizeDelta: {x: 202.2103, y: 79.4713}
+  m_AnchoredPosition: {x: 0.69821, y: -71.9745}
+  m_SizeDelta: {x: 166.72, y: 65.5222}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &108649582
 MonoBehaviour:
@@ -385,7 +385,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenuPanel: {fileID: 0}
   settingPanel: {fileID: 0}
-  endPanel: {fileID: 0}
+  endPanelWin: {fileID: 0}
+  endPanelLose: {fileID: 0}
   timeDisplay: {fileID: 0}
   ScoreText: {fileID: 0}
   PackageText: {fileID: 0}
@@ -645,7 +646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -965,8 +966,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 39.736}
-  m_SizeDelta: {x: 202.2103, y: 79.4713}
+  m_AnchoredPosition: {x: 0.0000076294, y: 32.487}
+  m_SizeDelta: {x: 165.3236, y: 64.9743}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1339542798
 MonoBehaviour:

@@ -8,7 +8,7 @@ public class EnemySpawn : MonoBehaviour
     public GameObject boss;
     public float xPos;
     public float yPos;
-    private int enemyCount;
+    
     public int enemyMaxCount;
     public int enemyMinCount;
     public int totalEnemyBeforeBoss = 10;
@@ -17,16 +17,20 @@ public class EnemySpawn : MonoBehaviour
     private bool bossSpawn = false;
     [SerializeField] private RectTransform spawnRange;
 
-    public int enemyGroupNum = 3;
+    
     public int enemyRound = 3;
 
     private Vector3 groupPos;
+    private int enemyGroupNum;
+    private int enemyCount;
+
+    private bool reSpawn;
 
     // Start is called before the first frame update
     void Start()
     {
         enemyCount = 0;
-        //StartCoroutine(Spawn());
+        reSpawn = false;
     }
 
     // Update is called once per frame
@@ -34,10 +38,18 @@ public class EnemySpawn : MonoBehaviour
     {
         if (enemyRound > 0)
         {
-            if ((enemyCount == 0) && (!spawning))
+            if(enemyCount == 0)
             {
-                enemyRound--;
-                StartCoroutine(Spawn());
+                getNewGroup();
+            }
+            if (reSpawn && (!spawning))
+            {
+                if(enemyCount < enemyGroupNum) { 
+                    StartCoroutine(Spawn());
+                } else
+                {
+                    reSpawn = false;
+                }
             }
         } else
         {
@@ -55,22 +67,26 @@ public class EnemySpawn : MonoBehaviour
         xPos = Random.Range(0, 20);
         yPos = Random.Range(0, 5);
         Instantiate(boss, new Vector3(xPos, yPos, 0), Quaternion.identity);
+
     }
 
     IEnumerator Spawn()
     {
         spawning = true;
+        Instantiate(enemy, groupPos + new Vector3(Random.value, Random.Range(-2,2)), Quaternion.identity);
+        enemyCount += 1;
+        yield return new WaitForSeconds(spawnInterval);
+        spawning = false;
+    }
+
+    void getNewGroup()
+    {
+        enemyRound--;
         xPos = Random.Range(spawnRange.anchorMin.x, spawnRange.anchorMax.x);
         yPos = Random.Range(spawnRange.anchorMin.y, spawnRange.anchorMax.y);
         groupPos = new Vector3(xPos, yPos, 0);
-        int count = Random.Range(enemyMinCount, enemyMaxCount);
-        for(int i = 0; i < count; i++)
-        {
-            Instantiate(enemy, groupPos + new Vector3(Random.value, Random.Range(-2,2)), Quaternion.identity);
-            enemyCount += 1;
-        }
-        yield return new WaitForSeconds(spawnInterval);
-        spawning = false;
+        enemyGroupNum = Random.Range(enemyMinCount, enemyMaxCount);
+        reSpawn = true;
     }
 
     public void enemyDied()

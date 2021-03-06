@@ -79,12 +79,13 @@ public class PlayerMovement : MonoBehaviour
         StartCoroutine(Grab());
         if (dodgeball)
         {
-                catchedBall = dodgeball.tag;
-                Destroy(dodgeball.gameObject);
-                ballInHand = dodgeball.gameObject;
-                Sprite ball = dodgeball.GetComponent <SpriteRenderer>().sprite;
-                _inventoryUI.PickUp(dodgeball.tag);
-                PickupBall(ball, dodgeball.transform);
+            catchedBall = dodgeball.tag;
+            Debug.Log(catchedBall);
+            Destroy(dodgeball.gameObject);
+            ballInHand = dodgeball.gameObject;
+            Sprite ball = dodgeball.GetComponent <SpriteRenderer>().sprite;
+            _inventoryUI.PickUp(dodgeball.tag);
+            PickupBall(ball, dodgeball.transform);
         }
     }
 
@@ -102,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnInventory(InputValue val)
     {
-        Debug.Log("something");
+        //Debug.Log("something");
         if (val.Get<float>() > 0)
         {
             _inventoryUI.UpSlot();

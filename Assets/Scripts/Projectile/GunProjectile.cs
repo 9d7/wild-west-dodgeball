@@ -19,7 +19,8 @@ public class GunProjectile : Projectile
     void Start()
     {
         InitObject();
-        secondsPerShot = Mathf.PI * 2f / (turnSpeed * shotsPerTurn);
+        secondsPerShot = Mathf.PI * 2f / (float)(turnSpeed * shotsPerTurn);
+        Debug.Log(secondsPerShot);
 
     }
 

@@ -218,7 +218,7 @@ public class EnemyMovement : MonoBehaviour
         }
         else
         {
-            if (Random.value < 0.8f)
+            if (Random.value < 0.9f)
             {
                 Shoot(pos, enemyToPlayer, "bottle");
             }

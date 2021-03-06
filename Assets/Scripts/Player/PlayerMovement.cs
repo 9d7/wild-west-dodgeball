@@ -145,12 +145,13 @@ public class PlayerMovement : MonoBehaviour
 
     void ThrowBall()
     {
-        if (!_inventoryUI.UseCurrent())
+        string throwTag = _inventoryUI.UseCurrent();
+        if (throwTag == null)
             return;
         showBall.enabled = false;
         //GameObject newDodgeball = GameObject.Instantiate(dodgeball);
         Vector2 pos = (Vector2)transform.position + (aimingDir * 1.5f);
-        GameObject newProj = Instantiate(projectileTypes[catchedBall]?.template, pos, Quaternion.identity);
+        GameObject newProj = Instantiate(projectileTypes[throwTag]?.template, pos, Quaternion.identity);
         Projectile proj = newProj.GetComponent<Projectile>();
         proj.direction = aimingDir;
         newProj.layer = LayerMask.NameToLayer("ProjectileFromAlly");

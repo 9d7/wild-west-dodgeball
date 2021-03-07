@@ -67,6 +67,11 @@ public class EnemySpawn : MonoBehaviour
                 bossSpawn = true;
                 spawnBoss();
             }
+            if(enemyCount == 0)
+            {
+                getNewGroup();
+                StartCoroutine(Spawn());
+            }
         }
     }
 
@@ -92,8 +97,10 @@ public class EnemySpawn : MonoBehaviour
     void getNewGroup()
     {
         enemyRound--;
-        xPos = Random.Range(spawnRange.anchorMin.x, spawnRange.anchorMax.x);
-        yPos = Random.Range(spawnRange.anchorMin.y, spawnRange.anchorMax.y);
+        //xPos = Random.Range(spawnRange.anchorMin.x, spawnRange.anchorMax.x);
+        //yPos = Random.Range(spawnRange.anchorMin.y, spawnRange.anchorMax.y);
+        xPos = Random.Range(-16, 50);
+        yPos = Random.Range(-15, 1);
         groupPos = new Vector3(xPos, yPos, 0);
         enemyGroupNum = Random.Range(enemyMinCount, enemyMaxCount);
         reSpawn = true;

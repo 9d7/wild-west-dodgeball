@@ -119,8 +119,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 0}
-  speed: 10
-  turnSpeed: 10
+  speed: 5
+  turnSpeed: 5
   turning: 0
   collideSound: {fileID: 8300000, guid: 8cfe4f720726a4a408e4ac2787283eec, type: 3}
   tempSound: {fileID: 2038119517885338936, guid: d9898f80a7ee29a419d25358888a10c6, type: 3}

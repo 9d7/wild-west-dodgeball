@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     public ProjectileTypes projectileTypes;
 
     [Header("UI")] [SerializeField] private InventoryUI _inventoryUI;
+    [SerializeField] private  DialogUIManager _dialogUI;
 
     private GameObject ballInHand;
     private Vector2 aimingDir;
@@ -51,6 +52,11 @@ public class PlayerMovement : MonoBehaviour
     private string catchedBall = "";
 
     private Rigidbody2D rigid;
+
+    void OnSkip()
+    {
+        _dialogUI.OnSkip();
+    }
 
     void Start()
     {

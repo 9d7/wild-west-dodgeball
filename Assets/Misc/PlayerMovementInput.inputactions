@@ -60,6 +60,14 @@
                     "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Skip",
+                    "type": "Button",
+                    "id": "6f61e50d-ed03-4904-8b4f-b162a072c805",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -230,17 +238,6 @@
                 },
                 {
                     "name": "",
-                    "id": "94fc2e20-c685-460d-b8d0-e3fc90192ec8",
-                    "path": "<Keyboard>/f",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Grab",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "5f8cf0d8-02d8-4404-b836-32b5db908a4c",
                     "path": "<Keyboard>/p",
                     "interactions": "",
@@ -293,6 +290,17 @@
                     "action": "Inventory",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "e7bfa4e5-ec53-4e1b-ad3c-31d29d5ec25d",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Skip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

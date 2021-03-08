@@ -73,6 +73,14 @@ public class @PlayerMovementInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Skip"",
+                    ""type"": ""Button"",
+                    ""id"": ""6f61e50d-ed03-4904-8b4f-b162a072c805"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -243,17 +251,6 @@ public class @PlayerMovementInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""94fc2e20-c685-460d-b8d0-e3fc90192ec8"",
-                    ""path"": ""<Keyboard>/f"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Grab"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""5f8cf0d8-02d8-4404-b836-32b5db908a4c"",
                     ""path"": ""<Keyboard>/p"",
                     ""interactions"": """",
@@ -306,6 +303,17 @@ public class @PlayerMovementInput : IInputActionCollection, IDisposable
                     ""action"": ""Inventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e7bfa4e5-ec53-4e1b-ad3c-31d29d5ec25d"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Skip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -321,6 +329,7 @@ public class @PlayerMovementInput : IInputActionCollection, IDisposable
         m_Player_Grab = m_Player.FindAction("Grab", throwIfNotFound: true);
         m_Player_GamePause = m_Player.FindAction("GamePause", throwIfNotFound: true);
         m_Player_Inventory = m_Player.FindAction("Inventory", throwIfNotFound: true);
+        m_Player_Skip = m_Player.FindAction("Skip", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -377,6 +386,7 @@ public class @PlayerMovementInput : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Grab;
     private readonly InputAction m_Player_GamePause;
     private readonly InputAction m_Player_Inventory;
+    private readonly InputAction m_Player_Skip;
     public struct PlayerActions
     {
         private @PlayerMovementInput m_Wrapper;
@@ -388,6 +398,7 @@ public class @PlayerMovementInput : IInputActionCollection, IDisposable
         public InputAction @Grab => m_Wrapper.m_Player_Grab;
         public InputAction @GamePause => m_Wrapper.m_Player_GamePause;
         public InputAction @Inventory => m_Wrapper.m_Player_Inventory;
+        public InputAction @Skip => m_Wrapper.m_Player_Skip;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -418,6 +429,9 @@ public class @PlayerMovementInput : IInputActionCollection, IDisposable
                 @Inventory.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventory;
                 @Inventory.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventory;
                 @Inventory.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventory;
+                @Skip.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkip;
+                @Skip.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkip;
+                @Skip.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkip;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -443,6 +457,9 @@ public class @PlayerMovementInput : IInputActionCollection, IDisposable
                 @Inventory.started += instance.OnInventory;
                 @Inventory.performed += instance.OnInventory;
                 @Inventory.canceled += instance.OnInventory;
+                @Skip.started += instance.OnSkip;
+                @Skip.performed += instance.OnSkip;
+                @Skip.canceled += instance.OnSkip;
             }
         }
     }
@@ -456,5 +473,6 @@ public class @PlayerMovementInput : IInputActionCollection, IDisposable
         void OnGrab(InputAction.CallbackContext context);
         void OnGamePause(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
+        void OnSkip(InputAction.CallbackContext context);
     }
 }

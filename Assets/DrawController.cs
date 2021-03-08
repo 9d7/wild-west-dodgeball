@@ -11,6 +11,8 @@ public class DrawController : MonoBehaviour
     {
         cg.alpha = 1;
         anim.SetTrigger("DoDraw");
+        
+        SendMessage("DoDrawAudio");
     }
     
     // Start is called before the first frame update

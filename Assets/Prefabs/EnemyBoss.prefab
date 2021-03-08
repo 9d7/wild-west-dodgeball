@@ -513,21 +513,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tempAudio: {fileID: 2038119517885338936, guid: d9898f80a7ee29a419d25358888a10c6, type: 3}
-  movementPerFootstep: 0.5
-  timePerIdle: 0
+  movementPerFootstep: 5
+  timePerIdle: 10
   idleSounds:
-  - {fileID: 8300000, guid: c8199c447d7a5f841bb32594f228581b, type: 3}
-  - {fileID: 8300000, guid: c6d7857f2a77bef47b7d0737e497c81a, type: 3}
-  - {fileID: 8300000, guid: 4e0e3f311d01a2d45b131dbe66d9aee4, type: 3}
+  - {fileID: 8300000, guid: 324f850831ae77649a836d8e242c1149, type: 3}
+  - {fileID: 8300000, guid: 1e17ba9363f09204c82fe460f468c898, type: 3}
   footstepSounds:
   - {fileID: 8300000, guid: 8b858f193250cef40a6224cde0e1fc36, type: 3}
   - {fileID: 8300000, guid: b9ef5fccdacc25741bdeb78234d3e42d, type: 3}
   deathSounds:
-  - {fileID: 8300000, guid: 5d2a1fed9bf403141a75746f6b330933, type: 3}
+  - {fileID: 8300000, guid: 2d76cd0600bfb2c448fc9ef23c90cd47, type: 3}
+  - {fileID: 8300000, guid: cebcef1f6d900ff438b48c735c1d8d65, type: 3}
   throwSounds:
-  - {fileID: 8300000, guid: e92bf708950e5d346b8bd6b85b93e5ec, type: 3}
-  - {fileID: 8300000, guid: 5397a67e9341c804f9c8b98eb2716edd, type: 3}
-  - {fileID: 8300000, guid: f7bcdf93eb876e2428009e717c3370c3, type: 3}
+  - {fileID: 8300000, guid: 20d4e93d476a7b344b54b0268930487c, type: 3}
+  - {fileID: 8300000, guid: 008bc2c276a7ac44b92f35209e7016c1, type: 3}
+  - {fileID: 8300000, guid: 17a75d356c0578b49ab0e4322bb89277, type: 3}
 --- !u!95 &793677709
 Animator:
   serializedVersion: 3

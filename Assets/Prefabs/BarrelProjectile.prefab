@@ -122,7 +122,7 @@ MonoBehaviour:
   speed: 5
   turnSpeed: 5
   turning: 0
-  collideSound: {fileID: 8300000, guid: 8cfe4f720726a4a408e4ac2787283eec, type: 3}
+  collideSound: {fileID: 8300000, guid: e06495f57a51c544583161591241061e, type: 3}
   tempSound: {fileID: 2038119517885338936, guid: d9898f80a7ee29a419d25358888a10c6, type: 3}
   thrownByPlayer: 0
   shatterEffect: {fileID: 6889233091101276014, guid: 84d235e859d73fc4dba69bd738f096b9, type: 3}

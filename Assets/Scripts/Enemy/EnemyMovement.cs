@@ -254,7 +254,7 @@ public class EnemyMovement : MonoBehaviour
             health -= 1;
             if (healthBar)
             {
-                //healthBar.RenderHealth((health / startingHealth) * 100);
+                healthBar.RenderHealth((health / startingHealth) * 100);
             }
             if(health <= 0)
             {

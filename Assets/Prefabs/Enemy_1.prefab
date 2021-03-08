@@ -85,9 +85,8 @@ MonoBehaviour:
   projectileTypes: {fileID: 11400000, guid: 492df79b605bfe54a87a5ac6cd95f6c4, type: 2}
   attackInterval: 2
   randomSeed: 45
-  enemySpawn: {fileID: 0}
   enemyZone: {fileID: 0}
-  menuController: {fileID: 0}
+  healthBar: {fileID: 0}
 --- !u!70 &2049137047
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -168,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tempAudio: {fileID: 2038119517885338936, guid: d9898f80a7ee29a419d25358888a10c6, type: 3}
-  movementPerFootstep: 0.5
+  movementPerFootstep: 5
   timePerIdle: 0
   idleSounds:
   - {fileID: 8300000, guid: c8199c447d7a5f841bb32594f228581b, type: 3}

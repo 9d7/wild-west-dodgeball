@@ -34,7 +34,7 @@ public class PlayerAudio : MonoBehaviour
              TemporaryAudio temp = newSound.GetComponent<TemporaryAudio>();
              temp.audio = footstepSounds[UnityEngine.Random.Range(0, footstepSounds.Count)];
              temp.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
-             temp.volume = 1f;
+             temp.volume = 0.75f;
              temp.destination = "Environment";
          }
     }
@@ -58,7 +58,7 @@ public class PlayerAudio : MonoBehaviour
          temp.audio = throwEmptyAudio;
          temp.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
          temp.volume = 1f;
-         temp.destination = "Environment";
+         temp.destination = "Player";
     }
     
     // ThrowBallAudio
@@ -69,7 +69,7 @@ public class PlayerAudio : MonoBehaviour
          temp.audio = throwBallAudio[UnityEngine.Random.Range(0, throwBallAudio.Count)];
          temp.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
          temp.volume = 1f;
-         temp.destination = "Environment";
+         temp.destination = "Player";
     }
     
     // DashAudio
@@ -80,7 +80,7 @@ public class PlayerAudio : MonoBehaviour
          temp.audio = dashAudio;
          temp.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
          temp.volume = 1f;
-         temp.destination = "Environment";
+         temp.destination = "Player";
     }
 
     public void PlayerHurtAudio()

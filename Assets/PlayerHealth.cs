@@ -57,6 +57,10 @@ public class PlayerHealth : MonoBehaviour
             menuController.GameEnd(false);
             return true;
         }
+        
+        // Audio
+        SendMessage("PlayerHurtAudio"); 
+
 
         return false;
     }

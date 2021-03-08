@@ -128,6 +128,9 @@ public class PlayerMovement : MonoBehaviour
 
     void PickupBall(Sprite ball, Transform t)
     {
+        
+        SendMessage("PickupBallAudio");
+        
         showBall.sprite = ball;
         showBall.enabled = true;
         Transform oldParent = showBall.transform.parent;
@@ -146,7 +149,12 @@ public class PlayerMovement : MonoBehaviour
     {
         string throwTag = _inventoryUI.UseCurrent();
         if (throwTag == null)
+        {
+            // for audio
+            SendMessage("ThrowEmptyAudio");
             return;
+        }
+
         showBall.enabled = false;
         //GameObject newDodgeball = GameObject.Instantiate(dodgeball);
         Vector2 pos = (Vector2)transform.position + (aimingDir * 1.5f);
@@ -156,6 +164,8 @@ public class PlayerMovement : MonoBehaviour
         newProj.layer = LayerMask.NameToLayer("ProjectileFromAlly");
         proj.speed = 30;
         proj.thrownByPlayer = true;
+        
+        SendMessage("ThrowBallAudio");
         /*
         newProj.transform.position = transform.position + (Vector3)(aimingDir * 1.5f);
         Debug.Log(aimingDir);
@@ -199,6 +209,7 @@ public class PlayerMovement : MonoBehaviour
         canDash = false;
         dashing = true;
         spriteAnim.SetBool("Dashing", true);
+        SendMessage("DashAudio");
         rigid.velocity = movementInput * (Speed * DashMultiplier);
         GetComponent<PlayerHealth>().BeInvincibleForTime(DashTime);
         yield return new WaitForSeconds(DashTime);

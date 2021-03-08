@@ -39,6 +39,7 @@ public class EnemyMovement : MonoBehaviour
     private EnemySpawn enemySpawn;
     private MainMenu menuController;
     private int startingHealth;
+    private Animator anim;
 
     public HealthUIController healthBar;
 
@@ -54,9 +55,8 @@ public class EnemyMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        anim = GetComponent<Animator>();
         startingHealth = health;
-        Debug.Log(startingHealth);
         menuController = GameObject.FindObjectOfType<MainMenu>();
         enemySpawn = GameObject.FindObjectOfType<EnemySpawn>();
         rbody = GetComponent<Rigidbody2D>();
@@ -233,26 +233,33 @@ public class EnemyMovement : MonoBehaviour
             }
         }
     }
+
+    IEnumerator DieInTime()
+    {
+        yield return new WaitForSeconds(0.7f);
+        SendMessage("EnemyDie");
+        enemySpawn.enemyDied();
+        if(gameObject.tag == "boss")
+        {
+            menuController.GameEnd(true);
+        }
+        Destroy(enemyZone);
+    }
     private void OnCollisionEnter2D(Collision2D other)
     {
         if(other.collider.gameObject.layer == LayerMask.NameToLayer("ProjectileFromAlly"))
         {
             Debug.Log("took hit");
-            
+            anim.SetTrigger("Hurt");
             health -= 1;
             if (healthBar)
             {
-                healthBar.RenderHealth((health / startingHealth) * 100);
+                //healthBar.RenderHealth((health / startingHealth) * 100);
             }
             if(health <= 0)
             {
-                SendMessage("EnemyDie");
-                Destroy(enemyZone);
-                enemySpawn.enemyDied();
-                if(gameObject.tag == "boss")
-                {
-                    menuController.GameEnd(true);
-                }
+                StartCoroutine(DieInTime());
+
             }
         }
     }

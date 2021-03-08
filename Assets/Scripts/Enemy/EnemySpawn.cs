@@ -80,8 +80,8 @@ public class EnemySpawn : MonoBehaviour
 
     void spawnBoss()
     {
-        bossHealthBar.gameObject.SetActive(true);
-        bossHealthBar.RenderHealth(100);
+        //bossHealthBar.gameObject.SetActive(true);
+        //bossHealthBar.RenderHealth(100);
         preSpawnBossSprite.enabled = false;
         Debug.Log("BOSS");
         xPos = Random.Range(0, 20);

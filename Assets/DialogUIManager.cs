@@ -17,6 +17,8 @@ public class DialogUIManager : MonoBehaviour
     [SerializeField] private Dialog[] initialDialog;
 
     private bool shouldSkipNextLine = false;
+
+    [SerializeField] private Animator showInstructionsAnim;
     
 
     [Serializable]
@@ -63,6 +65,7 @@ public class DialogUIManager : MonoBehaviour
         if (initialDialog)
         {
             GameManager.Instance.StartAction();
+            showInstructionsAnim.SetTrigger("Start");
         }
         cg.alpha = 0;
     }

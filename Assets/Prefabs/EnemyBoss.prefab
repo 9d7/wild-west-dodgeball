@@ -355,6 +355,7 @@ GameObject:
   - component: {fileID: 967787400921260979}
   - component: {fileID: 967787400921260989}
   - component: {fileID: 3301663945385836055}
+  - component: {fileID: 793677709}
   m_Layer: 11
   m_Name: Boss
   m_TagString: boss
@@ -430,9 +431,8 @@ MonoBehaviour:
   projectileTypes: {fileID: 11400000, guid: 492df79b605bfe54a87a5ac6cd95f6c4, type: 2}
   attackInterval: 5
   randomSeed: 6
-  enemySpawn: {fileID: 0}
   enemyZone: {fileID: 4097269261689413122}
-  menuController: {fileID: 5394232430307690796, guid: 36a4d257bf7802f429c99015fc084973, type: 3}
+  healthBar: {fileID: 0}
 --- !u!70 &967787400921260979
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -528,3 +528,22 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e92bf708950e5d346b8bd6b85b93e5ec, type: 3}
   - {fileID: 8300000, guid: 5397a67e9341c804f9c8b98eb2716edd, type: 3}
   - {fileID: 8300000, guid: f7bcdf93eb876e2428009e717c3370c3, type: 3}
+--- !u!95 &793677709
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8341516359165070564}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 29efe5b6b07782146b506f7d6f7f7d56, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

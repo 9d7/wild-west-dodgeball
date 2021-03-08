@@ -18,6 +18,7 @@ public class EnemySpawn : MonoBehaviour
     private bool bossSpawn = false;
     [SerializeField] private RectTransform spawnRange;
     [SerializeField] private SpriteRenderer preSpawnBossSprite;
+    [SerializeField] private HealthUIController bossHealthBar;
     
     public int enemyRound = 3;
 
@@ -30,12 +31,14 @@ public class EnemySpawn : MonoBehaviour
 
     public void StartSpawning()
     {
+        Debug.Log("started spawning");
         canSpawn = true;
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        bossHealthBar.gameObject.SetActive(false);
         enemyCount = 0;
         reSpawn = false;
     }
@@ -72,11 +75,14 @@ public class EnemySpawn : MonoBehaviour
 
     void spawnBoss()
     {
+        bossHealthBar.gameObject.SetActive(true);
+        bossHealthBar.RenderHealth(100);
         preSpawnBossSprite.enabled = false;
         Debug.Log("BOSS");
         xPos = Random.Range(0, 20);
         yPos = Random.Range(0, 5);
-        Instantiate(boss, new Vector3(xPos, yPos, 0), Quaternion.identity);
+        GameObject bossSpawned = GameObject.Instantiate(boss, new Vector3(xPos, yPos, 0), Quaternion.identity);
+        bossSpawned.GetComponentInChildren<EnemyMovement>().healthBar = bossHealthBar;
 
     }
 

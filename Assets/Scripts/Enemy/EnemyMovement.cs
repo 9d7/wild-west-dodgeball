@@ -38,6 +38,9 @@ public class EnemyMovement : MonoBehaviour
 
     private EnemySpawn enemySpawn;
     private MainMenu menuController;
+    private int startingHealth;
+
+    public HealthUIController healthBar;
 
     enum enemy_state
     {
@@ -51,6 +54,9 @@ public class EnemyMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        startingHealth = health;
+        Debug.Log(startingHealth);
         menuController = GameObject.FindObjectOfType<MainMenu>();
         enemySpawn = GameObject.FindObjectOfType<EnemySpawn>();
         rbody = GetComponent<Rigidbody2D>();
@@ -232,7 +238,12 @@ public class EnemyMovement : MonoBehaviour
         if(other.collider.gameObject.layer == LayerMask.NameToLayer("ProjectileFromAlly"))
         {
             Debug.Log("took hit");
+            
             health -= 1;
+            if (healthBar)
+            {
+                healthBar.RenderHealth((health / startingHealth) * 100);
+            }
             if(health <= 0)
             {
                 SendMessage("EnemyDie");
